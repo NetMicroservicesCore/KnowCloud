@@ -1,7 +1,14 @@
+using KnowCloud.Contract;
+using KnowCloud.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
+builder.Services.AddTransient<IDataCloudAzure, DataCloudAzure>();
+
 
 var app = builder.Build();
 
