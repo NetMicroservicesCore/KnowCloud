@@ -37,12 +37,24 @@ namespace KnowCloud.Services
                     URL = blob.Uri.ToString(),
                     Titulo = filaNameOrigin
                 };
+                
             });
+            var result = await Task.WhenAll(task);
+            return result;
         }
 
-        public Task Delete(string path, string container)
+        public async Task Delete(string path, string container)
         {
-            throw new NotImplementedException(); ;
+            if (string.IsNullOrEmpty(path)) 
+            {
+                return;
+            }
+            var client = new BlobContainerClient(connectionString,container);
+            await client.CreateIfNotExistsAsync();
+            var fileName = Path.GetFileName(path);
+            var blob = client.GetBlobClient(fileName);
+            await blob.DeleteIfExistsAsync();
+
         }
     }
 }
