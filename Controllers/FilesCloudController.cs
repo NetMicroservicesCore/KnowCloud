@@ -17,6 +17,9 @@ namespace KnowCloud.Controllers
         public async Task<ActionResult> Post(int Id, [FromForm] IEnumerable<IFormFile> archivos)
         {
             //verificar si existen archvios adjuntos
+
+            //subimos los archivos a nuestra nube
+            await cloudAzure.UpLoadFiles(container, archivos);
             return Ok();
         }
 
