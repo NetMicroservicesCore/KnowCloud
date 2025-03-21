@@ -1,4 +1,5 @@
 ﻿using KnowCloud.Contract;
+using KnowCloud.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KnowCloud.Controllers
@@ -19,7 +20,15 @@ namespace KnowCloud.Controllers
             //verificar si existen archvios adjuntos
 
             //subimos los archivos a nuestra nube
-            await cloudAzure.UpLoadFiles(container, archivos);
+            var result =await cloudAzure.UpLoadFiles(container, archivos);
+            var filesAtach = result.Select((result, indice) => new FileAttach
+            {
+                FechaCreacion = DateTime.UtcNow,
+                URL= result.URL,
+                Titulo= result.Titulo,
+                Orden = indice + 1    
+
+            }).ToList();
             return Ok();
         }
 
