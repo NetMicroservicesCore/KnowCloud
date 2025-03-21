@@ -1,9 +1,10 @@
 ﻿using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
+using KnowCloud.Contract;
 
 namespace KnowCloud.Services
 {
-    public class DataCloudAzure
+    public class DataCloudAzure: IDataCloudAzure
     {
         private string connectionString;
 
