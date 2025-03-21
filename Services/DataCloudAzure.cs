@@ -11,7 +11,13 @@ namespace KnowCloud.Services
         {
             connectionString = configuration.GetConnectionString("AzureStorage");
         }
-        public async Task<string> UpLoadFiles(string container, IEnumerable<IFormFile> files)
+        /// <summary>
+        /// Este metodo se encarga de almacenar un archivo en la nube de Azure
+        /// </summary>
+        /// <param name="container"></param>
+        /// <param name="files">los archivos a subir en la nube</param>
+        /// <returns>una tarea que almacena  archivos</returns>
+        public async Task<AlmacenarArchivoResult> UpLoadFiles(string container, IEnumerable<IFormFile> files)
         {
             var client = new BlobContainerClient(connectionString,container);
             await client.CreateIfNotExistsAsync();
@@ -26,7 +32,11 @@ namespace KnowCloud.Services
                 var blobHttpHeaders = new BlobHttpHeaders();
                 blobHttpHeaders.ContentType = file.ContentType;
                 await blob.UploadAsync(file.OpenReadStream(),blobHttpHeaders);
-
+                return new AlmacenarArchivoResult
+                {
+                    URL = blob.Uri.ToString(),
+                    Titulo = filaNameOrigin
+                };
             });
         }
 
