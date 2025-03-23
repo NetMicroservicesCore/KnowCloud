@@ -18,7 +18,7 @@
         }
 
         var formData = new FormData();
-        formData.append("file", file);
+        formData.append("archivos", file);
 
         // ID dinámico (puedes cambiarlo según tus necesidades)
         var userId = 123; // Reemplazar con el ID real
@@ -26,7 +26,7 @@
         ///var userId = $("#btnGuardar").data("user-id");
         $.ajax({
             url: `/api/archivos/${userId}`,
-            type: "Post",
+            type: "POST",
             data: formData,
             processData: false,
             contentType: false,
