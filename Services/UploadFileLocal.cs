@@ -27,7 +27,7 @@ namespace KnowCloud.Services
         /// <param name="files">los archivos cargados</param>
         /// <returns>una proyeccion de todos los archivos</returns>
         /// <exception cref="NotImplementedException"></exception>
-        public Task<CloudFileResult[]> UpLoadFiles(string container, IEnumerable<IFormFile> files)
+        public async Task<CloudFileResult[]> UpLoadFiles(string container, IEnumerable<IFormFile> files)
         {
             var task = files.Select(async file =>
             {
@@ -39,7 +39,28 @@ namespace KnowCloud.Services
                 var nombreNewFile = $"{Guid.NewGuid()}{extension}";
                 //creamos la carpeta
                 string folder = Path.Combine(_env.WebRootPath,container);
+
+                if (!Directory.Exists(folder)) {
+                    Directory.CreateDirectory(folder);
+                }
+                string pathFile = Path.Combine(folder,nombreNewFile);
+                using (var memoryStream = new MemoryStream()) {
+                    await file.CopyToAsync(memoryStream);
+                    var contenido = memoryStream.ToArray();
+                    await File.WriteAllBytesAsync(pathFile,contenido);
+                }
+                //armamos la url 
+                var url = $"{_httpContextAccessor.HttpContext.Request.Scheme}://{_httpContextAccessor.HttpContext.Request.Host}";
+                var urlArchivo = Path.Combine(url,container,nombreNewFile).Replace("\\","/");
+                return new CloudFileResult
+                {
+                    URL = urlArchivo,
+                    Titulo = fileOriginName
+                };
             });
+            //cuando se termine todo el procesamiento
+            var result = await Task.WhenAll(task);
+            return result;
         }
     }
 }
