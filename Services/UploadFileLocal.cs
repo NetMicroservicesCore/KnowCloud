@@ -15,6 +15,13 @@ namespace KnowCloud.Services
             _httpContextAccessor = httpContextAccessor;
 
         }
+
+        /// <summary>
+        /// Se encarga de realizar la eliminacion del archivo
+        /// </summary>
+        /// <param name="path">el directorio del archivo</param>
+        /// <param name="container">el nombre de la carpeta o folder.</param>
+        /// <returns>una tarea completada</returns>
         public Task Delete(string path, string container)
         {
             if (string.IsNullOrWhiteSpace(path)) 
@@ -23,6 +30,11 @@ namespace KnowCloud.Services
             }
             var fileName = Path.GetFileName(path);
             var directoryFile = Path.Combine(_env.WebRootPath,container,fileName);
+            if (File.Exists(directoryFile)) 
+            {
+                File.Delete(directoryFile);
+            }
+            return Task.CompletedTask;
         }
 
         /// <summary>
