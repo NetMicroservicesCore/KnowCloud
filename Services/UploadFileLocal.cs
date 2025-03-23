@@ -17,7 +17,12 @@ namespace KnowCloud.Services
         }
         public Task Delete(string path, string container)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(path)) 
+            {
+                return Task.CompletedTask;
+            }
+            var fileName = Path.GetFileName(path);
+            var directoryFile = Path.Combine(_env.WebRootPath,container,fileName);
         }
 
         /// <summary>
