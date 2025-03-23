@@ -11,8 +11,8 @@ namespace KnowCloud.Services
         private readonly IHttpContextAccessor _httpContextAccessor;
         public UploadFileLocal(IWebHostEnvironment env, IHttpContextAccessor httpContextAccessor)
         {
-            _env = env;
-            _httpContextAccessor = httpContextAccessor;
+            _env = env ?? throw new ArgumentNullException(nameof(env));
+            _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor)); 
 
         }
 
