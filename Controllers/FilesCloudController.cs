@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KnowCloud.Controllers
 {
+    [ApiController]
     [Route("api/archivos")]
     public class FilesCloudController : ControllerBase
     {
@@ -14,7 +15,7 @@ namespace KnowCloud.Controllers
             this.cloudAzure = _cloudAzure;
         }
 
-        [HttpPost("{Id:int}")]
+        [HttpPost("{Id:int}")] //,Name ="UploadFile"
         public async Task<ActionResult> Post(int Id, [FromForm] IEnumerable<IFormFile> archivos)
         {
             //verificar si existen archvios adjuntos

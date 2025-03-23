@@ -25,8 +25,8 @@
         /// ID dinámico obtenido desde un atributo del botón
         ///var userId = $("#btnGuardar").data("user-id");
         $.ajax({
-            url: `api/archivos/${userId}`,
-            type: "POST",
+            url: `/api/archivos/${userId}`,
+            type: "Post",
             data: formData,
             processData: false,
             contentType: false,
