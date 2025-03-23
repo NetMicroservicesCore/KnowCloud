@@ -32,7 +32,12 @@ body {
 .title-morado {
     color: #5a189a;
 }
-
+.title-orange {
+    color: #C14600;
+}
+    .title-orange:hover {
+        color: #C14600;
+    }
 .title-size-max {
     font-size: large;
 }
@@ -149,7 +154,7 @@ h4 {
 input[type=file]::file-selector-button {
     margin-right: 20px;
     border: none;
-    background: #084cdf;
+    background: #5a189a; /*#084cdf;*/
     padding: 10px 20px;
     border-radius: 10px;
     color: #fff;
@@ -158,7 +163,7 @@ input[type=file]::file-selector-button {
 }
 
     input[type=file]::file-selector-button:hover {
-        background: #0d45a5;
+        background: #C14600; /*#0d45a5;*/
     }
 .drop-container {
     position: relative;
