@@ -5,10 +5,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpContextAccessor();
 
 
 builder.Services.AddTransient<IDataCloudAzure, DataCloudAzure>();
-
+builder.Services.AddScoped<IDataCloudAzure, UploadFileLocal>();
 
 var app = builder.Build();
 
