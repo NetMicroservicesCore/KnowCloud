@@ -15,7 +15,7 @@ namespace KnowCloud.Controllers
             this.cloudAzure = _cloudAzure;
         }
 
-        [HttpPost("{Id:int}")] //,Name ="UploadFile"
+        [HttpPost("{Id:int}")] 
         public async Task<ActionResult> Post(int Id, [FromForm] IEnumerable<IFormFile> archivos)
         {
             //verificar si existen archvios adjuntos
