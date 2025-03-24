@@ -1,4 +1,5 @@
 using KnowCloud.Contract;
+using KnowCloud.Filters;
 using KnowCloud.Services;
 using Microsoft.AspNetCore.Http.Features;
 
@@ -6,6 +7,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<CustomExceptionFilterAttribute>(); // Agrega el filtro de excepción globalmente
+});
 builder.Services.AddHttpContextAccessor();
 
 

@@ -1,6 +1,8 @@
 ﻿using KnowCloud.Contract;
+using KnowCloud.Filters;
 using KnowCloud.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace KnowCloud.Controllers
 {
@@ -15,6 +17,7 @@ namespace KnowCloud.Controllers
             this.cloudAzure = _cloudAzure;
         }
 
+        [CustomExceptionFilterAttribute]
         [HttpPost("{Id:int}")] 
         public async Task<ActionResult> Post(int Id, [FromForm] IEnumerable<IFormFile> archivos)
         {
