@@ -151,6 +151,12 @@ h4 {
     --bs-btn-active-border-color: #{shade-color($bd-violet, 20%)};
     background-color: #5a189a;
 }
+    .btn-bd-morado:hover {
+        color:#fff;
+        background-color: #C14600 !important;
+    }
+
+
 input[type=file]::file-selector-button {
     margin-right: 20px;
     border: none;
