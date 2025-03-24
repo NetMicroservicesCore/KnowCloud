@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container-fluid">
+    <div class="row mt-3">
+        <div class="d-flex flex-row justify-content-center">
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+            <div class="card shadow-lg p-3 mb-5 bg-body rounded">
+                <div class="card-title">
+                   <span class="title-morado roboto-ExtraBold-800">
+                            <i class="fas fa-users m-1"></i>
+                       Login
+                       </span>
+                </div>
+                <hr />
+                <div class="card-subtitle">
+                    <span class="roboto-thin-ExtraLight-200">Ingresa tus credenciales de usuario</span>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="justify-content-sm-start w-25 col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                        <label class="title-morado roboto-thin-ExtraLight-200">
+                            <i class="fas fa-user-alt"></i>
+                            Nombre de Usuario:</label>
+                    </div>
+                    <div class="justify-content-sm-center w-75 col-xs-12 col-sm-12 col-md-10 col-lg-10">
+                        <input type="text" class="form-control form-control-sm" placeholder="Nombre de Usuario ó Email" />
+                    </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="justify-content-sm-start w-25 col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                            <label class="title-morado roboto-thin-ExtraLight-200">
+                                <i class="fas fa-lock"></i>
+                                Password:
+                            </label>
+                        </div>
+                        <div class="justify-content-sm-center w-75 col-xs-12 col-sm-12 col-md-10 col-lg-10">
+                            <input type="password" class="form-control form-control-sm" placeholder="Tu Password" />
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="justify-content-lg-start">
+                                    <label class="title-morado roboto-thin-ExtraLight-200 m-1">
+                                        <input type="checkbox" class="title-morado roboto-thin-ExtraLight-200" value="Recordarme" />Recordarme
+                                    </label>
+                                    
+                                </div>
+                        </div>
+                            <div class="row mt-3">
+                                <div class="col-12 text-end">
+                                    <input type="submit" class="btn btn-bd-morado w-50" value="Ingresar" />
+                                </div>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
