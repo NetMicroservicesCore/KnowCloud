@@ -14,8 +14,8 @@ builder.Services.AddControllers(options =>
 builder.Services.AddHttpContextAccessor();
 
 
-//builder.Services.AddTransient<IDataCloudAzure, DataCloudAzure>();
-builder.Services.AddScoped<IDataCloudAzure, UploadFileLocal>();
+builder.Services.AddTransient<IDataCloudAzure, DataCloudAzure>();
+//builder.Services.AddScoped<IDataCloudAzure, UploadFileLocal>();
 
 //podemos subir archivos a traves del services.
 builder.Services.Configure<FormOptions>(options =>
