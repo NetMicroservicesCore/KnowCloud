@@ -33,7 +33,7 @@ namespace KnowCloud.Controllers
                 FechaCreacion = DateTime.UtcNow,
                 URL= result.URL,
                 Titulo= result.Titulo,
-                Orden = indice + 1    
+                Orden = indice +1  
 
             }).ToList();
             return Ok();
