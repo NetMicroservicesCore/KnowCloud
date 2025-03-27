@@ -1,6 +1,7 @@
 using KnowCloud.Contract;
 using KnowCloud.Filters;
 using KnowCloud.Services;
+using KnowCloud.Services.Contract;
 using KnowCloud.Utility;
 using Microsoft.AspNetCore.Http.Features;
 
@@ -16,8 +17,12 @@ builder.Services.AddHttpContextAccessor();
 
 Utilities.AuthAPIBase = builder.Configuration["ServiceUrls:AuthAPI"];
 
+builder.Services.AddHttpClient<IAuthServices, AuthServices>();
 builder.Services.AddTransient<IDataCloudAzure, DataCloudAzure>();
 //builder.Services.AddScoped<IDataCloudAzure, UploadFileLocal>();
+
+builder.Services.AddScoped<IBaseService, BaseService>();
+builder.Services.AddScoped<IAuthServices, AuthServices>();
 
 //podemos subir archivos a traves del services.
 builder.Services.Configure<FormOptions>(options =>
