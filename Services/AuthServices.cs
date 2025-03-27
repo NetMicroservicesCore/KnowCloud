@@ -22,14 +22,25 @@ namespace KnowCloud.Services
             });
         }
 
-        public Task<ResponseWrapper<LoginResponseDto>> LoginAsync(LoginRequestDto loginRequestDto)
+        public async Task<ResponseDto> LoginAsync(LoginRequestDto loginRequestDto)
         {
-            throw new NotImplementedException();
+            return await _baseService.SendAsync(new RequestDto() { 
+                ApiType = Utility.Utilities.ApiType.POST,
+                Data= loginRequestDto,
+                Url=Utility.Utilities.AuthAPIBase+"/api/auth/login"
+            
+            });
         }
 
-        public Task<ResponseDto> RegisterAsync(RegistrationRequestDto registrationRequestDto)
+        public async Task<ResponseDto> RegisterAsync(RegistrationRequestDto registrationRequestDto)
         {
-            throw new NotImplementedException();
+            return await _baseService.SendAsync(new RequestDto()
+            {
+                ApiType = Utility.Utilities.ApiType.POST,
+                Data = registrationRequestDto,
+                Url = Utility.Utilities.AuthAPIBase + "/api/auth/register"
+
+            });
         }
     }
 }
