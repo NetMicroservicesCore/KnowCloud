@@ -1,6 +1,7 @@
 using KnowCloud.Contract;
 using KnowCloud.Filters;
 using KnowCloud.Services;
+using KnowCloud.Utility;
 using Microsoft.AspNetCore.Http.Features;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,7 @@ builder.Services.AddControllers(options =>
 });
 builder.Services.AddHttpContextAccessor();
 
+Utilities.AuthAPIBase = builder.Configuration["ServiceUrls:AuthAPI"];
 
 builder.Services.AddTransient<IDataCloudAzure, DataCloudAzure>();
 //builder.Services.AddScoped<IDataCloudAzure, UploadFileLocal>();
