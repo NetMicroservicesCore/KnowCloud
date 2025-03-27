@@ -1,4 +1,4 @@
-﻿
+﻿@model KnowCloud.Models.Dto.LoginRequestDto
 @{
     ViewData["Title"] = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -21,6 +21,7 @@
                     <span class="roboto-thin-ExtraLight-200">Ingresa tus credenciales de usuario</span>
                 </div>
                 <div class="card-body">
+                    <form id="frmForm" method="post">
                     <div class="row">
                         <div class="justify-content-sm-start w-25 col-xs-12 col-sm-12 col-md-2 col-lg-2">
                         <label class="title-morado roboto-thin-ExtraLight-200">
@@ -28,7 +29,7 @@
                             Nombre de Usuario:</label>
                     </div>
                     <div class="justify-content-sm-center w-75 col-xs-12 col-sm-12 col-md-10 col-lg-10">
-                        <input type="text" class="form-control form-control-sm" placeholder="Nombre de Usuario ó Email" />
+                       <input type="text" asp-for="UserName" class="form-control form-control-sm" placeholder="Nombre de Usuario ó Email" />
                     </div>
                     </div>
                     <div class="row mt-2">
@@ -56,8 +57,13 @@
                                     <input type="submit" class="btn btn-bd-morado w-25" value="Ingresar" />
                                 </div>
                             </div>
-                        
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div asp-validation-summary="All" class="text-danger"></div>
+                            </div>
+                        </div>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
