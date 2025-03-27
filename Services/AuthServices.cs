@@ -6,10 +6,20 @@ namespace KnowCloud.Services
 {
     public class AuthServices : IAuthServices
     {
-        private readonly 
-        public Task<ResponseDto> AssignRoleAsync(RegistrationRequestDto registrationRequestDto)
+        private readonly IBaseService _baseService;
+
+        public AuthServices(IBaseService baseService)
         {
-            throw new NotImplementedException();
+            _baseService = baseService;
+        }
+        public async Task<ResponseDto> AssignRoleAsync(RegistrationRequestDto registrationRequestDto)
+        {
+            return await _baseService.SendAsync(new RequestDto()
+            {
+                ApiType = Utility.Utilities.ApiType.POST,
+                Data= registrationRequestDto,
+                Url= Utility.Utilities.AuthAPIBase + "/api/auth/AssignRole"
+            });
         }
 
         public Task<ResponseWrapper<LoginResponseDto>> LoginAsync(LoginRequestDto loginRequestDto)
