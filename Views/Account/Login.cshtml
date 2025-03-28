@@ -29,8 +29,8 @@
                             Nombre de Usuario:</label>
                     </div>
                     <div class="justify-content-sm-center w-75 col-xs-12 col-sm-12 col-md-10 col-lg-10">
-                       <input type="text" asp-for="UserName" class="form-control form-control-sm" placeholder="Nombre de Usuario ó Email" required />
-                                    <span asp-validaton-for="UserName" class="text-bg-danger"></span>
+                                    <input type="text" asp-for="UserName" class="form-control form-control-sm" placeholder="Nombre de Usuario ó Email" required maxlength="100" />
+                            <span asp-validaton-for="UserName" class="text-bg-danger"></span>
                     </div>
                     </div>
                     <div class="row mt-2">
@@ -41,7 +41,7 @@
                             </label>
                         </div>
                         <div class="justify-content-sm-center w-75 col-xs-12 col-sm-12 col-md-10 col-lg-10">
-                             <input type="password" asp-for="Password" class="form-control form-control-sm" placeholder="Tu Password" required />
+                                    <input type="password" asp-for="Password" class="form-control form-control-sm" placeholder="Tu Password" required maxlength="100" />
                                     <span asp-validaton-for="Password" class="text-bg-danger"></span>
                         </div>
                     </div>
