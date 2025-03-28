@@ -29,7 +29,7 @@
                             Nombre de Usuario:</label>
                     </div>
                     <div class="justify-content-sm-center w-75 col-xs-12 col-sm-12 col-md-10 col-lg-10">
-                       <input type="text" asp-for="UserName" class="form-control form-control-sm" placeholder="Nombre de Usuario ó Email" />
+                       <input type="text" asp-for="UserName" class="form-control form-control-sm" placeholder="Nombre de Usuario ó Email" required />
                     </div>
                     </div>
                     <div class="row mt-2">
@@ -40,7 +40,7 @@
                             </label>
                         </div>
                         <div class="justify-content-sm-center w-75 col-xs-12 col-sm-12 col-md-10 col-lg-10">
-                            <input type="password" class="form-control form-control-sm" placeholder="Tu Password" />
+                             <input type="password" asp-for="Password" class="form-control form-control-sm" placeholder="Tu Password" required />
                         </div>
                     </div>
                     <div class="row mt-2">
