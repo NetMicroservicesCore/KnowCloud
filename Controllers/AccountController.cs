@@ -42,6 +42,8 @@ namespace KnowCloud.Controllers
             if (responseDto != null && responseDto.IsSuccess)
             {
                 LoginResponseDto loginResponseDto = JsonConvert.DeserializeObject<LoginResponseDto>(Convert.ToString(responseDto.Result));
+
+                await SignInUser(loginResponseDto);
                 //establecemos nuestro login de autenticacion que proviene del api de autenticacion
                 _tokenProvider.SetToken(loginResponseDto.Token);
                 return RedirectToAction("Perfil", "Account");
@@ -84,7 +86,7 @@ namespace KnowCloud.Controllers
                 jwt.Claims.FirstOrDefault(u => u.Type == JwtRegisteredClaimNames.Name).Value));
 
             var principal = new ClaimsPrincipal();
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,);
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,principal);
 
         }
 
