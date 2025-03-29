@@ -27,7 +27,7 @@ namespace KnowCloud.Services
             return await _baseService.SendAsync(new RequestDto() { 
                 ApiType = Utility.Utilities.ApiType.POST,
                 Data= loginRequestDto,
-                Url=Utility.Utilities.AuthAPIBase+"/api/auth/login"
+                Url=Utility.Utilities.AuthAPIBase+"/api/AuthApi/login"
             
             });
         }

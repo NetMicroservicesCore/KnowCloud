@@ -3,6 +3,7 @@ using KnowCloud.Services;
 using KnowCloud.Services.Contract;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Newtonsoft.Json;
 
 namespace KnowCloud.Controllers
 {
@@ -29,6 +30,22 @@ namespace KnowCloud.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginRequestDto login)
+        {
+            ResponseDto responseDto = await _authService.LoginAsync(login);
+            if (responseDto != null && responseDto.IsSuccess)
+            {
+                LoginResponseDto loginResponseDto = JsonConvert.DeserializeObject<LoginResponseDto>(Convert.ToString(responseDto.Result));
+                return RedirectToAction("Perfil", "Account");
+            }
+           else {
+                ModelState.AddModelError("CustomError",responseDto.Message);
+                return View(login);
+            }
+        }
+
 
         [HttpPost("AssignRole")]
         public async Task<IActionResult> AssignRole([FromBody] RegistrationRequestDto model)
