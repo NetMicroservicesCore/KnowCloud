@@ -69,6 +69,12 @@ namespace KnowCloud.Controllers
             return Ok();
         }
 
+        [HttpGet]
+        public  IActionResult Denied()
+        {
+            return View();
+        }
+
 
         private async Task SignInUser(LoginResponseDto login)
         {

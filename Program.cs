@@ -3,6 +3,7 @@ using KnowCloud.Filters;
 using KnowCloud.Services;
 using KnowCloud.Services.Contract;
 using KnowCloud.Utility;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http.Features;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +30,13 @@ builder.Services.AddScoped<ITokenProvider, TokenProvider>();
 builder.Services.Configure<FormOptions>(options =>
 {
     options.MultipartBodyLengthLimit = 10 * 1024 * 1024; // Tamaño máximo de archivo permitido (10 MB)
+});
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+{
+    options.ExpireTimeSpan = TimeSpan.FromHours(1);
+    options.LoginPath = "/Account/Login";
+    options.AccessDeniedPath = "/Auth/Denied";
 });
 
 var app = builder.Build();
