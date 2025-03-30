@@ -39,6 +39,14 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     options.AccessDeniedPath = "/Auth/Denied";
 });
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminPolicy", policy =>
+        policy.RequireRole("RoleAdmin"));
+});
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -54,6 +62,8 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseStatusCodePagesWithRedirects("/Account/Denied");
 
 app.MapStaticAssets();
 

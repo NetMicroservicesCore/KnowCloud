@@ -19,7 +19,7 @@ public class HomeController : Controller
         return View();
     }
 
-    [Authorize(Roles =Utility.Utilities.RoleAdmin)]
+    [Authorize(Policy = "AdminPolicy")]
     public IActionResult Privacy()
     {
         return View();
