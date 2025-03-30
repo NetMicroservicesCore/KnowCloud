@@ -40,6 +40,16 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Perfil">Perfil</a>
                             </li>
+                        }
+                    </ul>
+
+                    <ul class="navbar-nav ms-auto">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            
+                            <li class="nav-item">
+                                <a class="nav-link title-morado" href="#" style="color:#5a189a;">Hola: @User.Identity.Name</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
                             </li>
@@ -53,9 +63,6 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
                             </li>
                         }
-                        
-                        
-                        
                     </ul>
                 </div>
             </div>
