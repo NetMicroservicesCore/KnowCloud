@@ -91,10 +91,24 @@ namespace KnowCloud.Controllers
             identity.AddClaim(new Claim(ClaimTypes.Name,
                 jwt.Claims.FirstOrDefault(u => u.Type == JwtRegisteredClaimNames.Name).Value));
 
-            var principal = new ClaimsPrincipal();
+            var principal = new ClaimsPrincipal(identity);
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,principal);
 
         }
+
+        /// <summary>
+        /// Metodo de eliminacion de la cookie de autenticacion
+        /// </summary>
+        /// <returns>una tarea que se encarga de eliminar cualquier interaccion con la cookie de autenticacion</returns>
+        public async Task<IActionResult> Logout()
+        {
+            //salimos de la cookie de autenticacion saliendo del contexto principal
+            await HttpContext.SignOutAsync();
+            //limpiamos el token de autenticacion
+            _tokenProvider.ClearToken();
+            return RedirectToAction("Index","Home");
+        }
+
 
 
     }
