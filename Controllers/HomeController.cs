@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using KnowCloud.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace KnowCloud.Controllers;
 
@@ -18,6 +19,7 @@ public class HomeController : Controller
         return View();
     }
 
+    [Authorize(Roles =Utility.Utilities.RoleAdmin)]
     public IActionResult Privacy()
     {
         return View();
