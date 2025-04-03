@@ -2,7 +2,6 @@
 using KnowCloud.Filters;
 using KnowCloud.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace KnowCloud.Controllers
 {

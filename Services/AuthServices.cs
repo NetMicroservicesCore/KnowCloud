@@ -1,5 +1,4 @@
-﻿using KnowCloud.Models;
-using KnowCloud.Models.Dto;
+﻿using KnowCloud.Models.Dto;
 using KnowCloud.Services.Contract;
 
 namespace KnowCloud.Services
