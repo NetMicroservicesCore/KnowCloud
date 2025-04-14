@@ -13,6 +13,11 @@ namespace KnowCloud.Services
             _baseService = baseService;
         }
 
+        /// <summary>
+        /// Metodo para crear cupones dentro de la aplicacion web
+        /// </summary>
+        /// <param name="couponDto">recibe un objeto del tipo cupon</param>
+        /// <returns>retorna una tarea con una respuesta del tipo ResponseDto</returns>
         public async Task<ResponseDto> CreateCouponsAsync(CouponDto couponDto)
         {
             return await _baseService.SendAsync(new RequestDto()
