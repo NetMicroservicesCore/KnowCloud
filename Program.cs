@@ -15,6 +15,8 @@ builder.Services.AddControllers(options =>
     options.Filters.Add<CustomExceptionFilterAttribute>(); // Agrega el filtro de excepción globalmente
 });
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddHttpClient();
+builder.Services.AddHttpClient<IProduct>
 
 Utilities.AuthAPIBase = builder.Configuration["ServiceUrls:AuthAPI"];
 
