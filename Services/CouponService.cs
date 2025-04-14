@@ -46,6 +46,11 @@ namespace KnowCloud.Services
             });
         }
 
+        /// <summary>
+        /// Metodo que se encarga de consultar un cupon por el codigo del cupon
+        /// </summary>
+        /// <param name="couponCode">el codigo del cupon</param>
+        /// <returns>una tarea que regresa el responseDto como entidad de respuesta</returns>
         public async Task<ResponseDto> GetCouponAsync(string couponCode)
         {
             return await _baseService.SendAsync(new RequestDto()
@@ -55,6 +60,11 @@ namespace KnowCloud.Services
             });
         }
 
+        /// <summary>
+        /// este metodo se encarga de obtener un cupon por el identificador del cupon
+        /// </summary>
+        /// <param name="id">identificador del cupon</param>
+        /// <returns>una tarea con la entidad ResponseDto de por medio</returns>
         public async Task<ResponseDto> GetCouponByIdAsync(int id)
         {
             return await _baseService.SendAsync(new RequestDto()
