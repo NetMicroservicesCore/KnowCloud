@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using KnowCloud.Utility;
+using System.ComponentModel.DataAnnotations;
 
 namespace KnowCloud.Models.Dto
 {
