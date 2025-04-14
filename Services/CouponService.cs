@@ -28,14 +28,22 @@ namespace KnowCloud.Services
             });
         }
 
-        public Task<ResponseDto> DeleteCouponsAsync(int id)
+        public async Task<ResponseDto> DeleteCouponsAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _baseService.SendAsync(new RequestDto()
+            {
+                ApiType = Utility.Utilities.ApiType.DELETE,
+                Url = Utility.Utilities.CouponAPIBase + "/api/coupon/" + id
+            });
         }
 
-        public Task<ResponseDto> GetAllCouponsAsync()
+        public async Task<ResponseDto> GetAllCouponsAsync()
         {
-            throw new NotImplementedException();
+            return await _baseService.SendAsync(new RequestDto()
+            {
+                ApiType = Utility.Utilities.ApiType.GET,
+                Url = Utility.Utilities.CouponAPIBase + "/api/coupon"
+            });
         }
 
         public Task<ResponseDto> GetCouponAsync(string couponCode)
