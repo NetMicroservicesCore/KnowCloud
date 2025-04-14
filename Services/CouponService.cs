@@ -1,13 +1,26 @@
 ﻿using KnowCloud.Contract;
 using KnowCloud.Models.Dto;
+using KnowCloud.Services.Contract;
 
 namespace KnowCloud.Services
 {
     public class CouponService : ICouponService
     {
-        public Task<ResponseDto> CreateCouponsAsync(CouponDto couponDto)
+
+        private readonly IBaseService _baseService;
+        public CouponService(IBaseService baseService)
         {
-            throw new NotImplementedException();
+            _baseService = baseService;
+        }
+
+        public async Task<ResponseDto?> CreateCouponsAsync(CouponDto couponDto)
+        {
+            return await _baseService.SendAsync(new RequestDto()
+            {
+                ApiType = Utility.Utilities.ApiType.POST,
+                Data = couponDto,
+                Url = Utility.Utilities.CouponAPIBase + "/api/coupon"
+            });
         }
 
         public Task<ResponseDto> DeleteCouponsAsync(int id)
