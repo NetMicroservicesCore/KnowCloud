@@ -74,6 +74,11 @@ namespace KnowCloud.Services
             });
         }
 
+        /// <summary>
+        /// Este metodo se encarga de la actualziacion de los cupones a traves del serviceCoupon
+        /// </summary>
+        /// <param name="couponDto">una entidad del tipo CouponDto</param>
+        /// <returns>una tarea con la respuesta envuelta en un dto</returns>
         public async Task<ResponseDto> UpdateCouponsAsync(CouponDto couponDto)
         {
             return await _baseService.SendAsync(new RequestDto()
