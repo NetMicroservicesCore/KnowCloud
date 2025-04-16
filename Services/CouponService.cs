@@ -74,9 +74,14 @@ namespace KnowCloud.Services
             });
         }
 
-        public Task<ResponseDto> UpdateCouponsAsync(CouponDto couponDto)
+        public async Task<ResponseDto> UpdateCouponsAsync(CouponDto couponDto)
         {
-            throw new NotImplementedException();
+            return await _baseService.SendAsync(new RequestDto()
+            {
+                ApiType = Utility.Utilities.ApiType.PUT,
+                Data = couponDto,
+                Url = Utility.Utilities.CouponAPIBase + "/api/coupon"
+            });
         }
     }
 }
