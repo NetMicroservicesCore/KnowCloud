@@ -16,7 +16,7 @@ namespace KnowCloud.Services
         /// </summary>
         /// <param name="productDto">la entidad base</param>
         /// <returns>una respuesta del tipo responseDto</returns>
-        public async Task<ResponseDto> CreateProductAsync(ProductDto productDto)
+        public async Task<ResponseDto> CreateProductsAsync(ProductDto productDto)
         {
             return await _baseService.SendAsync(new RequestDto()
             {
@@ -27,6 +27,7 @@ namespace KnowCloud.Services
             });
         }
 
+        
         public async Task<ResponseDto> DeleteProductsAsync(int id)
         {
             return await _baseService.SendAsync(new RequestDto()
@@ -51,6 +52,17 @@ namespace KnowCloud.Services
             {
                 ApiType = Utility.Utilities.ApiType.GET,
                 Url = Utility.Utilities.ProductAPIBase + "/api/product/" + id
+            });
+        }
+
+        public async Task<ResponseDto> UpdateProductsAsync(ProductDto productDto)
+        {
+            return await _baseService.SendAsync(new RequestDto()
+            {
+                ApiType = Utility.Utilities.ApiType.PUT,
+                Data = productDto,
+                Url = Utility.Utilities.ProductAPIBase + "/api/product",
+                ContentType = Utility.Utilities.ContentType.MultipartFormData
             });
         }
 
