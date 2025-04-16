@@ -15,8 +15,8 @@ namespace KnowCloud.Controllers
             _couponService = couponService;
         }
 
-        [Authorize(Policy = "AdminPolicy")]
-        public IActionResult Create()
+        [HttpGet]
+        public ActionResult Create()
         {
             return View();
         }
