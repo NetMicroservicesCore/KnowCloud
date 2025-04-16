@@ -26,7 +26,16 @@ namespace KnowCloud.Services
                 ContentType = Utility.Utilities.ContentType.MultipartFormData
             });
         }
-        
+
+        public async Task<ResponseDto> DeleteProductsAsync(int id)
+        {
+            return await _baseService.SendAsync(new RequestDto()
+            {
+                ApiType = Utility.Utilities.ApiType.DELETE,
+                Url = Utility.Utilities.ProductAPIBase + "/api/product/" + id
+            });
+        }
+
 
     }
 }
