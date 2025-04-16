@@ -45,7 +45,14 @@ namespace KnowCloud.Services
             });
         }
 
-
+        public async Task<ResponseDto> GetProductByIdAsync(int id)
+        {
+            return await _baseService.SendAsync(new RequestDto()
+            {
+                ApiType = Utility.Utilities.ApiType.GET,
+                Url = Utility.Utilities.ProductAPIBase + "/api/product/" + id
+            });
+        }
 
 
     }
