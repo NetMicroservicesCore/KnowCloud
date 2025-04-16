@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using KnowCloud.Contract;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KnowCloud.Controllers
@@ -7,5 +8,10 @@ namespace KnowCloud.Controllers
     [ApiController]
     public class CouponController : ControllerBase
     {
+        private readonly ICouponService _couponService;
+        public CouponController(ICouponService couponService)
+        {
+            _couponService = couponService;
+        }
     }
 }
