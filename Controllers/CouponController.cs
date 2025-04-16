@@ -4,14 +4,18 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KnowCloud.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CouponController : ControllerBase
+   
+    public class CouponController : Controller
     {
         private readonly ICouponService _couponService;
         public CouponController(ICouponService couponService)
         {
             _couponService = couponService;
+        }
+
+        public async Task<IActionResult> CouponCreate()
+        {
+            return View();
         }
     }
 }
