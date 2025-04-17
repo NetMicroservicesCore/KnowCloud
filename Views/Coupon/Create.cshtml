@@ -1,19 +1,261 @@
-﻿
-@{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿<div class="container-fluid py-4">
+    <div class="row justify-content-center">
+        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-8">
+            <div class="card shadow-lg bg-body-tertiary rounded">
+                <div class="card-header bg-white border-bottom py-3">
+                    <h4 class="card-title title-morado roboto-Bold-700 mb-0">
+                        <i class="fa-solid fa-ticket-alt me-2"></i>Crear Nuevo Cupón
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <p class="card-text text-muted mb-4">Complete el formulario para generar un nuevo cupón de descuento. Los cupones pueden ser utilizados por los usuarios en sus compras.</p>
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="card w-75 mb-3 shadow-lg p-3 mb-5 bg-body-tertiary rounded">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Button</a>
+                    <form id="couponForm">
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <label class="form-label title-morado roboto-Medium-500">Código de Cupón</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light">
+                                        <i class="fa-solid fa-barcode"></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="couponCode" placeholder="Ej: SAVE20" required />
+                                    <button type="button" class="btn btn-outline-secondary" id="generateCode">
+                                        <i class="fa-solid fa-dice"></i> Generar
+                                    </button>
+                                </div>
+                                <div class="form-text">El código debe ser único y fácil de recordar</div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label title-morado roboto-Medium-500">Tipo de Descuento</label>
+                                <select class="form-select" id="discountType" required>
+                                    <option value="" selected disabled>Seleccione tipo de descuento</option>
+                                    <option value="percentage">Porcentaje (%)</option>
+                                    <option value="fixed">Monto Fijo ($)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <label class="form-label title-morado roboto-Medium-500">Valor del Descuento</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="discountValue" placeholder="Ingrese valor" min="0" required />
+                                    <span class="input-group-text bg-light" id="discountSymbol">%</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label title-morado roboto-Medium-500">Límite de Uso</label>
+                                <input type="number" class="form-control" id="usageLimit" placeholder="Cantidad máxima de usos" min="1" />
+                                <div class="form-text">Dejar en blanco para usos ilimitados</div>
+                            </div>
+                        </div>
+
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <label class="form-label title-morado roboto-Medium-500">Fecha de Inicio</label>
+                                <input type="date" class="form-control" id="startDate" required />
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label title-morado roboto-Medium-500">Fecha de Expiración</label>
+                                <input type="date" class="form-control" id="expiryDate" required />
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label title-morado roboto-Medium-500">Descripción</label>
+                            <textarea class="form-control" id="description" rows="3" placeholder="Describa los detalles y condiciones del cupón"></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label title-morado roboto-Medium-500">Categorías Aplicables</label>
+                            <div class="row row-cols-1 row-cols-md-3 g-2">
+                                <div class="col">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="category1">
+                                        <label class="form-check-label" for="category1">Documentos Premium</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="category2">
+                                        <label class="form-check-label" for="category2">Cursos Online</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="category3">
+                                        <label class="form-check-label" for="category3">Membresías</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="category4">
+                                        <label class="form-check-label" for="category4">Almacenamiento</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="category5">
+                                        <label class="form-check-label" for="category5">Servicios Enterprise</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-check form-switch mb-4">
+                            <input class="form-check-input" type="checkbox" id="activeStatus" checked>
+                            <label class="form-check-label title-morado roboto-Medium-500" for="activeStatus">Cupón Activo</label>
+                            <div class="form-text">Desactive esta opción para guardar como borrador</div>
+                        </div>
+
+                        <div class="card bg-light mb-4">
+                            <div class="card-body">
+                                <h6 class="card-title title-morado roboto-Medium-500">Vista Previa del Cupón</h6>
+                                <div class="p-3 bg-white rounded border d-flex align-items-center justify-content-between">
+                                    <div>
+                                        <span class="badge bg-primary mb-2">Descuento</span>
+                                        <h5 class="mb-1" id="previewCode">CUPÓN20</h5>
+                                        <small class="text-muted" id="previewDesc">20% de descuento en todas las categorías</small>
+                                    </div>
+                                    <div class="text-end">
+                                        <h4 class="text-primary mb-0" id="previewValue">20%</h4>
+                                        <small class="text-muted" id="previewDates">25/04/2025 - 25/05/2025</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer bg-white py-3 d-flex justify-content-end gap-2">
+                    <button type="button" class="btn btn-outline-secondary">
+                        <i class="fa-solid fa-xmark me-1"></i>Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-primary" form="couponForm">
+                        <i class="fa-solid fa-save me-1"></i>Guardar Cupón
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sección de Cupones Recientes -->
+            <div class="card shadow-sm mt-4">
+                <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center py-3">
+                    <h5 class="title-morado roboto-Bold-700 mb-0">Cupones Recientes</h5>
+                    <a href="#" class="btn btn-sm btn-outline-primary">Ver Todos</a>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Código</th>
+                                <th>Descuento</th>
+                                <th>Uso</th>
+                                <th>Expiración</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="fw-medium">WELCOME25</span></td>
+                                <td>25%</td>
+                                <td>45/100</td>
+                                <td>30/04/2025</td>
+                                <td><span class="badge bg-success">Activo</span></td>
+                                <td>
+                                    <div class="btn-group btn-group-sm">
+                                        <button type="button" class="btn btn-outline-secondary">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-outline-danger">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="fw-medium">FLASH50</span></td>
+                                <td>50%</td>
+                                <td>98/100</td>
+                                <td>20/04/2025</td>
+                                <td><span class="badge bg-warning text-dark">Casi agotado</span></td>
+                                <td>
+                                    <div class="btn-group btn-group-sm">
+                                        <button type="button" class="btn btn-outline-secondary">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-outline-danger">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="fw-medium">SPRING15</span></td>
+                                <td>15%</td>
+                                <td>23/200</td>
+                                <td>15/05/2025</td>
+                                <td><span class="badge bg-success">Activo</span></td>
+                                <td>
+                                    <div class="btn-group btn-group-sm">
+                                        <button type="button" class="btn btn-outline-secondary">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-outline-danger">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    // Script para actualizar la vista previa del cupón
+    $(document).ready(function() {
+        // Función para actualizar la vista previa
+        function updatePreview() {
+            const code = $('#couponCode').val() || 'CUPÓN20';
+            const discountType = $('#discountType').val() || 'percentage';
+            const discountValue = $('#discountValue').val() || '20';
+            const startDate = $('#startDate').val() ? new Date($('#startDate').val()).toLocaleDateString() : '25/04/2025';
+            const endDate = $('#expiryDate').val() ? new Date($('#expiryDate').val()).toLocaleDateString() : '25/05/2025';
+            const description = $('#description').val() || '20% de descuento en todas las categorías';
+
+            $('#previewCode').text(code);
+            $('#previewDesc').text(description.substring(0, 50) + (description.length > 50 ? '...' : ''));
+            $('#previewValue').text(discountType === 'percentage' ? discountValue + '%' : '$' + discountValue);
+            $('#previewDates').text(startDate + ' - ' + endDate);
+        }
+
+        // Escuchar cambios en los campos relevantes
+        $('#couponForm input, #couponForm select, #couponForm textarea').on('input change', updatePreview);
+
+        // Actualizar el símbolo según el tipo de descuento
+        $('#discountType').change(function() {
+            if ($(this).val() === 'percentage') {
+                $('#discountSymbol').text('%');
+            } else {
+                $('#discountSymbol').text('$');
+            }
+        });
+
+        // Generar código aleatorio
+        $('#generateCode').click(function() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let result = '';
+            for (let i = 0; i < 6; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            $('#couponCode').val(result);
+            updatePreview();
+        });
+    });
+</script>

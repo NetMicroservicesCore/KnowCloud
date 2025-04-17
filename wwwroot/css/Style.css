@@ -1,0 +1,103 @@
+﻿
+<style >
+/* Estilos para el sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    background-color: #ffffff;
+    border-right: 1px solid #dee2e6;
+    padding-top: 70px;
+    z-index: 100;
+    transition: all 0.3s;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.sidebar-header {
+    padding: 1rem;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.sidebar-content {
+    padding: 1rem 0;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    padding: 0.7rem 1.5rem;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+    .sidebar-link:hover {
+        background-color: #f8f9fa;
+        color: #5a189a;
+    }
+
+    .sidebar-link.active {
+        background-color: #f0e6fa;
+        color: #5a189a;
+        border-left: 3px solid #5a189a;
+    }
+
+.sidebar-icon {
+    margin-right: 10px;
+    font-size: 1.2rem;
+    width: 24px;
+    text-align: center;
+}
+
+.sidebar-toggle {
+    cursor: pointer;
+    margin-right: 15px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+/* Ajuste para el contenido principal cuando el sidebar está presente */
+.main-content {
+    margin-left: 250px;
+    transition: all 0.3s;
+}
+
+/* Ajustes para modo responsive */
+@media (max-width: 768px) {
+    .sidebar {
+        margin-left: -250px;
+    }
+
+        .sidebar.active {
+            margin-left: 0;
+        }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+        .main-content.sidebar-active {
+            margin-left: 250px;
+        }
+}
+
+/* Estilo para el fondo del overlay cuando el sidebar está activo en móviles */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 99;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+}
+
+    .sidebar-overlay.active {
+        display: block;
+        opacity: 1;
+    }
+
+</style >
