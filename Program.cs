@@ -28,7 +28,7 @@ builder.Services.AddTransient<IDataCloudAzure, DataCloudAzure>();
 builder.Services.AddScoped<IBaseService, BaseService>();
 builder.Services.AddScoped<IAuthServices, AuthServices>();
 builder.Services.AddScoped<ITokenProvider, TokenProvider>();
-
+builder.Services.AddScoped<ICouponService, CouponService>();
 //podemos subir archivos a traves del services.
 builder.Services.Configure<FormOptions>(options =>
 {

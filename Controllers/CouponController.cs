@@ -11,14 +11,14 @@ namespace KnowCloud.Controllers
         private readonly ICouponService _couponService;
         private readonly ILogger<HomeController> _logger;
 
-        public CouponController()
-        {
-                
-        }
-        //public CouponController(ICouponService couponService)
+        //public CouponController()
         //{
-        //    _couponService = couponService;
+                
         //}
+        public CouponController(ICouponService couponService)
+        {
+            _couponService = couponService;
+        }
 
         [HttpGet]
         public ActionResult Create()
