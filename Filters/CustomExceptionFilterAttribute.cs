@@ -12,7 +12,7 @@ namespace KnowCloud.Filters
 
         public void OnException(ExceptionContext context)
         {
-            Logger.Error(context.Exception, "Unhandled exception occurred.");
+            Logger.Error(context.Exception, "Ah ocurrido una excepcion en la solicitud.");
 
             context.Result = new ObjectResult(new { message = "An error occurred while processing your request." })
             {
