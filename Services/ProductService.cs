@@ -33,7 +33,7 @@ namespace KnowCloud.Services
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = Utility.Utilities.ApiType.DELETE,
-                Url = Utility.Utilities.ProductAPIBase + "/api/product/" + id
+                Url = Utility.Utilities.ProductAPIBase + "/api/Product/" + id
             });
         }
 
@@ -42,7 +42,7 @@ namespace KnowCloud.Services
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = Utility.Utilities.ApiType.GET,
-                Url = Utility.Utilities.ProductAPIBase + "/api/product"
+                Url = Utility.Utilities.ProductAPIBase + "/api/Product"
             });
         }
 
@@ -51,7 +51,7 @@ namespace KnowCloud.Services
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = Utility.Utilities.ApiType.GET,
-                Url = Utility.Utilities.ProductAPIBase + "/api/product/" + id
+                Url = Utility.Utilities.ProductAPIBase + "/api/Product/" + id
             });
         }
 
@@ -61,7 +61,7 @@ namespace KnowCloud.Services
             {
                 ApiType = Utility.Utilities.ApiType.PUT,
                 Data = productDto,
-                Url = Utility.Utilities.ProductAPIBase + "/api/product",
+                Url = Utility.Utilities.ProductAPIBase + "/api/Product",
                 ContentType = Utility.Utilities.ContentType.MultipartFormData
             });
         }

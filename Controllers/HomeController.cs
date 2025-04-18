@@ -20,7 +20,7 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
-        List<ProductDto> list = new();
+        List<ProductDto> list = new List<ProductDto>();
 
         ResponseDto response = await _productService.GetAllProductsAsync();
 

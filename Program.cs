@@ -20,7 +20,7 @@ builder.Services.AddHttpClient<IProductService, ProductService>();
 builder.Services.AddHttpClient<ICouponService, CouponService>();
 Utilities.CouponAPIBase = builder.Configuration["ServiceUrls:CouponAPI"];
 Utilities.AuthAPIBase = builder.Configuration["ServiceUrls:AuthAPI"];
-
+Utilities.ProductAPIBase = builder.Configuration["ServiceUrls:ProductAPI"];
 builder.Services.AddHttpClient<IAuthServices, AuthServices>();
 builder.Services.AddTransient<IDataCloudAzure, DataCloudAzure>();
 //builder.Services.AddScoped<IDataCloudAzure, UploadFileLocal>();

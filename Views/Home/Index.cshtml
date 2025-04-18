@@ -1,30 +1,423 @@
-﻿﻿@Model IEnumerable<ProductDto>
+﻿@model IEnumerable<KnowCloud.Models.Dto.ProductDto>
+@{
+    ViewData["Title"] = "Tienda en Línea";
+    var topProducts = Model.Take(10).ToList();
+}
 
-<form>
-    <div class="container row">
-        @foreach (var product in Model)
-        {
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="p-0 my-3 border rounded">
-                    <div class="card">
-                        <h3 class="card-title text-white-50 text-center py-2">@product.Name</h3>
-                        <img src="@product.ImageUrl" class="card-img-top">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between py-2">
-                                <span class="text-danger" style="font-size:20px;">@string.Format("{0:c}", product.Price)</span>
-                                <span class="badge bg-warning text-white p-2">@product.CategoryName</span>
-                            </div>
-                            <p class="card-text">@Html.Raw(product.Description)</p>
-                            <div class="row">
-                                <div class="col">
-                                    <a asp-action="ProductDetails" asp-route-productId="@product.ProductId"
-                                       class="btn btn-success form-control">Details</a>
+
+
+<!-- Spinner de carga para AJAX -->
+<div class="spinner-overlay" id="loadingSpinner">
+    <div class="spinner"></div>
+</div>
+
+<!-- Header principal -->
+<header class="store-header">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-4 mb-3 mb-lg-0">
+                <h1><i class="fas fa-store me-2"></i> Tu Tienda Online</h1>
+                <p class="mb-0">Los mejores productos al mejor precio</p>
+            </div>
+            <div class="col-lg-5 mb-3 mb-lg-0">
+                <div class="search-bar">
+                    <input type="text" class="form-control" id="searchInput" placeholder="¿Qué estás buscando?">
+                    <button type="button" id="searchButton"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            <div class="col-lg-3 text-lg-end">
+                <a href="#" class="btn btn-outline-light me-2"><i class="fas fa-user me-1"></i> Mi Cuenta</a>
+                <a href="#" class="btn btn-secondary position-relative">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        0
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <!-- Categorías de navegación -->
+    <div class="category-nav">
+        <nav class="nav justify-content-center flex-nowrap overflow-auto">
+            <a class="nav-link active" href="#" data-category="all">Todos</a>
+            <a class="nav-link" href="#" data-category="electronics">Electrónica</a>
+            <a class="nav-link" href="#" data-category="clothing">Ropa</a>
+            <a class="nav-link" href="#" data-category="home">Hogar</a>
+            <a class="nav-link" href="#" data-category="sports">Deportes</a>
+            <a class="nav-link" href="#" data-category="books">Libros</a>
+        </nav>
+    </div>
+
+    <!-- Carrusel de productos más buscados -->
+    <div class="mb-5">
+        <h2 class="carousel-title">Productos más buscados</h2>
+        <div class="carousel-container">
+            <div class="carousel-control prev" id="prevBtn">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="carousel-inner">
+                <div class="owl-carousel" id="topProductsCarousel">
+                    @foreach (var product in topProducts)
+                    {
+                        <div class="item">
+                            <div class="card product-card h-100">
+                                <h3 class="card-title">@product.Name</h3>
+                                <div class="card-img-container">
+                                    <img src="@product.ImageUrl" class="card-img-top" alt="@product.Name">
+                                </div>
+                                <div class="card-body d-flex flex-column">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span class="price">@string.Format("{0:c}", product.Price)</span>
+                                        <span class="badge">@product.CategoryName</span>
+                                    </div>
+                                    <p class="card-text flex-grow-1">@Html.Raw(product.Description)</p>
+                                    <div class="btn-group mt-3">
+                                        <a href="#" class="btn btn-primary" data-product-id="@product.ProductId">
+                                            <i class="fas fa-shopping-cart me-1"></i> Añadir
+                                        </a>
+                                        <a asp-action="ProductDetails" asp-route-productId="@product.ProductId" class="btn btn-outline-primary">
+                                            <i class="fas fa-info-circle me-1"></i> Detalles
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="carousel-control next" id="nextBtn">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+            <ol class="carousel-indicators" id="carouselIndicators">
+                <!-- Los indicadores se generarán dinámicamente con JS -->
+            </ol>
+        </div>
+    </div>
+
+    <!-- Filtros y ordenamiento -->
+    <div class="filters">
+        <div class="row">
+            <div class="col-12 col-md-8 mb-3 mb-md-0">
+                <h5 class="mb-2">Filtros</h5>
+                <div class="d-flex flex-wrap gap-2">
+                    <select class="form-select" id="priceFilter">
+                        <option value="">Precio</option>
+                        <option value="0-50">$0 - $50</option>
+                        <option value="50-100">$50 - $100</option>
+                        <option value="100-200">$100 - $200</option>
+                        <option value="200+">$200+</option>
+                    </select>
+                    <select class="form-select" id="ratingFilter">
+                        <option value="">Valoración</option>
+                        <option value="4+">4+ estrellas</option>
+                        <option value="3+">3+ estrellas</option>
+                        <option value="2+">2+ estrellas</option>
+                    </select>
+                    <button class="btn btn-primary" id="applyFilters">Aplicar</button>
+                    <button class="btn btn-outline-secondary" id="clearFilters">Limpiar</button>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <h5 class="mb-2">Ordenar por</h5>
+                <select class="form-select" id="sortProducts">
+                    <option value="featured">Destacados</option>
+                    <option value="price-asc">Precio: Menor a Mayor</option>
+                    <option value="price-desc">Precio: Mayor a Menor</option>
+                    <option value="newest">Más recientes</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Listado principal de productos -->
+    <div class="row" id="productsContainer">
+        @foreach (var product in Model)
+        {
+            <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mb-4">
+                <div class="card product-card h-100">
+                    <h3 class="card-title">@product.Name</h3>
+                    <div class="card-img-container">
+                        <img src="@product.ImageUrl" class="card-img-top" alt="@product.Name">
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="price">@string.Format("{0:c}", product.Price)</span>
+                            <span class="badge">@product.CategoryName</span>
+                        </div>
+                        <p class="card-text flex-grow-1">@Html.Raw(product.Description)</p>
+                        <div class="btn-group mt-3">
+                            <a href="#" class="btn btn-primary add-to-cart-btn" data-product-id="@product.ProductId">
+                                <i class="fas fa-shopping-cart me-1"></i> Añadir
+                            </a>
+                            <a asp-action="ProductDetails" asp-route-productId="@product.ProductId" class="btn btn-outline-primary">
+                                <i class="fas fa-info-circle me-1"></i> Detalles
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         }
     </div>
-</form>
+
+    <!-- Paginación -->
+    <nav aria-label="Navegación de páginas" class="my-4">
+        <ul class="pagination justify-content-center" id="pagination">
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+            </li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#">Siguiente</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<!-- Footer -->
+<footer class="store-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4 mb-md-0">
+                <h5>Sobre Nosotros</h5>
+                <p>Tu Tienda Online es el lugar perfecto para encontrar productos de alta calidad a precios increíbles. Nuestra misión es ofrecer la mejor experiencia de compra en línea.</p>
+                <div class="mt-3">
+                    <a href="#" class="me-2"><i class="fab fa-facebook-f fa-lg"></i></a>
+                    <a href="#" class="me-2"><i class="fab fa-twitter fa-lg"></i></a>
+                    <a href="#" class="me-2"><i class="fab fa-instagram fa-lg"></i></a>
+                    <a href="#" class="me-2"><i class="fab fa-youtube fa-lg"></i></a>
+                </div>
+            </div>
+            <div class="col-md-2 mb-4 mb-md-0">
+                <h5>Enlaces</h5>
+                <ul>
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#">Productos</a></li>
+                    <li><a href="#">Ofertas</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 mb-4 mb-md-0">
+                <h5>Categorías</h5>
+                <ul>
+                    <li><a href="#">Electrónica</a></li>
+                    <li><a href="#">Ropa</a></li>
+                    <li><a href="#">Hogar</a></li>
+                    <li><a href="#">Deportes</a></li>
+                    <li><a href="#">Libros</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h5>Contacto</h5>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt me-2"></i> Calle Principal #123</li>
+                    <li><i class="fas fa-phone me-2"></i> +123 456 7890</li>
+                    <li><i class="fas fa-envelope me-2"></i> info@tutienda.com</li>
+                </ul>
+                <div class="mt-3">
+                    <form id="newsletterForm">
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Tu email">
+                            <button class="btn btn-secondary" type="submit">Suscribir</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom text-center">
+            <p class="mb-0">© 2025 Tu Tienda Online. Todos los derechos reservados.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Scripts necesarios para la funcionalidad -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        // Inicializar el carrusel de productos destacados
+        $('#topProductsCarousel').owlCarousel({
+            loop: true,
+            margin: 20,
+            nav: false,
+            dots: false,
+            autoplay: true,
+            autoplayTimeout: 5000,
+            autoplayHoverPause: true,
+            responsive: {
+                0: { items: 1 },
+                576: { items: 2 },
+                992: { items: 3 },
+                1200: { items: 4 }
+            },
+            onInitialized: carouselInitialized
+        });
+
+        // Crear indicadores del carrusel
+        function carouselInitialized(event) {
+            var items = event.item.count;
+            var size = event.page.size;
+            var pages = Math.ceil(items / size);
+
+            var indicators = '';
+            for (var i = 0; i < pages; i++) {
+                indicators += '<li ' + (i === 0 ? 'class="active"' : '') + ' data-slide="' + i + '"></li>';
+            }
+
+            $('#carouselIndicators').html(indicators);
+
+            $('#carouselIndicators li').click(function() {
+                var slide = $(this).data('slide');
+                $('#topProductsCarousel').trigger('to.owl.carousel', [slide * size, 300]);
+                $('#carouselIndicators li').removeClass('active');
+                $(this).addClass('active');
+            });
+        }
+
+        // Botones de siguiente/anterior para el carrusel
+        $('#nextBtn').click(function() {
+            $('#topProductsCarousel').trigger('next.owl.carousel');
+            updateCarouselIndicators();
+        });
+
+        $('#prevBtn').click(function() {
+            $('#topProductsCarousel').trigger('prev.owl.carousel');
+            updateCarouselIndicators();
+        });
+
+        // Actualizar indicadores activos cuando cambia el carrusel
+        $('#topProductsCarousel').on('changed.owl.carousel', function(event) {
+            var current = event.item.index;
+            var size = event.page.size;
+            var count = event.item.count;
+            var page = Math.floor(((current - (count / 2)) % count) / size);
+            if (page < 0) page += Math.ceil(count / size);
+
+            $('#carouselIndicators li').removeClass('active');
+            $('#carouselIndicators li:eq(' + page + ')').addClass('active');
+        });
+
+        function updateCarouselIndicators() {
+            var current = $('#topProductsCarousel .owl-item.active').first().index();
+            var size = $('#topProductsCarousel').data('owl.carousel').settings.items;
+            var count = $('#topProductsCarousel .owl-item').not('.cloned').length;
+            var page = Math.floor(current / size);
+
+            $('#carouselIndicators li').removeClass('active');
+            $('#carouselIndicators li:eq(' + page + ')').addClass('active');
+        }
+
+        // Filtrar por categoría
+        $('.category-nav .nav-link').click(function(e) {
+            e.preventDefault();
+
+            $('.category-nav .nav-link').removeClass('active');
+            $(this).addClass('active');
+
+            var category = $(this).data('category');
+            filterProducts(category);
+        });
+
+        // Aplicar filtros
+        $('#applyFilters').click(function() {
+            applyFilters();
+        });
+
+        // Limpiar filtros
+        $('#clearFilters').click(function() {
+            $('#priceFilter').val('');
+            $('#ratingFilter').val('');
+            applyFilters();
+        });
+
+        // Ordenar productos
+        $('#sortProducts').change(function() {
+            sortProducts($(this).val());
+        });
+
+        // Buscar productos
+        $('#searchButton').click(function() {
+            searchProducts();
+        });
+
+        $('#searchInput').keypress(function(e) {
+            if (e.which === 13) {
+                searchProducts();
+            }
+        });
+
+        // Añadir al carrito
+        $('.add-to-cart-btn').click(function(e) {
+            e.preventDefault();
+
+            var productId = $(this).data('product-id');
+            addToCart(productId);
+        });
+
+        // Funciones AJAX para interactuar con el servidor
+        function filterProducts(category) {
+            showSpinner();
+
+            $.ajax({
+                url: '/Products/FilterByCategory',
+                type: 'GET',
+                data: { category: category },
+                success: function(data) {
+                    $('#productsContainer').html(data);
+                    hideSpinner();
+
+                    // Reinicializar los eventos de los nuevos productos
+                    initializeProductEvents();
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error al filtrar productos:", error);
+                    hideSpinner();
+
+                    // Mostrar mensaje de error
+                    showErrorMessage("No se pudieron cargar los productos. Por favor, inténtelo de nuevo más tarde.");
+                }
+            });
+        }
+
+        function applyFilters() {
+            showSpinner();
+
+            var priceRange = $('#priceFilter').val();
+            var rating = $('#ratingFilter').val();
+            var category = $('.category-nav .nav-link.active').data('category');
+            var sortBy = $('#sortProducts').val();
+
+            $.ajax({
+                url: '/Products/Filter',
+                type: 'GET',
+                data: {
+                    category: category,
+                    priceRange: priceRange,
+                    rating: rating,
+                    sortBy: sortBy
+                },
+                success: function(data) {
+                    $('#productsContainer').html(data);
+                    hideSpinner();
+
+                    // Reinicializar los eventos de los nuevos productos
+                    initializeProductEvents();
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error al aplicar filtros:", error);
+                    hideSpinner();
+
+                    // Mostrar mensaje de error
+                    showErrorMessage("No se pudieron aplicar los filtros. Por favor, inténtelo de nuevo más tarde.");
+                }
+            });
+            </script>
