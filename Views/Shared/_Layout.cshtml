@@ -17,54 +17,92 @@
     <script src="~/lib/jquery/dist/jquery.slim.js"></script>
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <link href="~/css/carrousel.css" rel="stylesheet" />
+    @RenderSection("Styles", required: false)
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow py-3">
             <div class="container-fluid">
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand title-morado roboto-Bold-700">KnowCloud</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand title-morado roboto-Bold-700 fs-4">KnowCloud</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
+                        aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link title-morado fs-6 mx-1" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link title-morado fs-6 mx-1" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Perfil">Perfil</a>
+                                <a class="nav-link title-morado fs-6 mx-1" asp-area="" asp-controller="Account" asp-action="Perfil">Perfil</a>
                             </li>
                         }
                     </ul>
 
-                    <ul class="navbar-nav ms-auto">
+                    <ul class="navbar-nav ms-auto align-items-center">
                         @if (User.Identity.IsAuthenticated)
                         {
-                            
                             <li class="nav-item">
-                                <a class="nav-link title-morado" href="#" style="color:#5a189a;">Hola: @User.Identity.Name</a>
+                                <a class="nav-link title-morado fs-6 mx-1" href="#" style="color:#5a189a;">Hola: @User.Identity.Name</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
+                                <a class="nav-link  fs-6 mx-1 title-morado" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
                             </li>
                         }
                         @if (!User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                                <a class="nav-link text-dark fs-6 mx-1" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                                <a class="nav-link text-dark fs-6 mx-1" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
                             </li>
                         }
+
+                        <!-- Carrito de compras mejorado -->
+                        <li class="nav-item dropdown mx-2">
+                            <a class="nav-link position-relative px-3 py-2 d-flex align-items-center gap-2 text-dark"
+                               href="#"
+                               role="button"
+                               data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                <i class="fas fa-shopping-cart fs-4 title-morado"></i>
+                                <span class="fs-6 fw-light d-none d-md-inline title-morado">Carrito</span>
+                                <span class="position-absolute top-0 end-0 translate-middle badge rounded-pill bg-danger fs-6 px-2 py-1">
+                                    3
+                                </span>
+                            </a>
+
+                            <!-- Mini-carrito desplegable -->
+                            <div class="dropdown-menu dropdown-menu-end shadow border-0 rounded-3 p-3" style="min-width: 350px;">
+                                <h6 class="dropdown-header pb-1 mb-3 fs-6 title-orange">Tu Carrito</h6>
+                                <hr />
+                                <div class="cart-items">
+                                    <!-- Ejemplo de productos en el carrito -->
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="flex-shrink-0">
+                                            <div class="bg-light rounded" style="width: 50px; height: 50px;"></div>
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <h6 class="mb-0">Producto 1</h6>
+                                            <p class="text-muted mb-0">$99.99</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-grid gap-2 mt-3">
+                                    <a href="#" class="btn btn-primary fw-medium py-2">Ver Carrito</a>
+                                    <a href="#" class="btn btn-success fw-medium py-2">Finalizar Compra</a>
+                                </div>
+                            </div>
+                        </li>
+
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Coupon" asp-action="Create">Cupones</a>
+                            <a class="nav-link fs-6 mx-1 title-morado" asp-area="" asp-controller="Coupon" asp-action="Create">Cupones</a>
                         </li>
                     </ul>
                 </div>
