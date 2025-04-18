@@ -85,7 +85,7 @@
     </div>
 
     <!-- Carrusel de productos destacados -->
-    <h4 class="mb-3 roboto-Medium-500 title-orange">Productos más buscados</h4>
+    <h4 class="mb-3 roboto-Medium-500 title-orange">Buscar un Producto</h4>
     <div class="owl-carousel owl-theme mb-5">
         <div class="item">
             <div class="card" style="width: 18rem;">
@@ -131,6 +131,18 @@
             
             </div>
     </div>
+    <div class="row mb-4">
+        <input type="text" id="searchInput" placeholder="Buscar producto..." class="form-control" />
+    </div>
+
+    <div id="carouselContainer" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner" id="carouselItemsContainer"></div>
+    </div>
+
+    <div class="row" id="productContainer"></div>
+    <div class="text-center mt-4 mb-2">
+        <button id="loadMoreBtn" class="btn btn-primary">Cargar más</button>
+    </div>
 
     <!-- Grid de productos -->
     <div class="row" id="productList">
@@ -154,57 +166,114 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script>
+        let currentPage = 1;
+        const pageSize = 10;
+        let currentSearch = '';
+
+        const API_ROUTES = {
+          products: '/api/productos', // <-- reemplaza esta ruta
+          carousel: '/api/productos/promociones', // <-- reemplaza esta ruta
+        };
+
         $(document).ready(function () {
-            // Inicializa carrusel
-            $('.owl-carousel').owlCarousel({
-                loop: true,
-                margin: 10,
-                nav: true,
-                responsive: {
-                    0: { items: 1 },
-                    600: { items: 2 },
-                    1000: { items: 3 }
-                }
-            });
+          loadProducts();
+          loadCarousel();
 
-            // Función de filtrado
-            function filterProducts() {
-                const search = $('#searchInput').val().toLowerCase();
-                const maxPrice = parseFloat($('#priceFilter').val());
-                const minRating = parseInt($('#ratingFilter').val()) || 0;
-                const sort = $('#sortFilter').val();
+          $('#searchInput').on('keyup', function () {
+            currentSearch = $(this).val();
+            currentPage = 1;
+            $('#productContainer').empty();
+            loadProducts();
+          });
 
-                let items = $('.product-item');
-
-                // Filtro de búsqueda, precio y rating
-                items.each(function () {
-                    const name = $(this).data('name').toLowerCase();
-                    const price = parseFloat($(this).data('price'));
-                    const rating = parseInt($(this).data('rating'));
-
-                    let match = true;
-
-                    if (search && !name.includes(search)) match = false;
-                    if (!isNaN(maxPrice) && price > maxPrice) match = false;
-                    if (rating < minRating) match = false;
-
-                    $(this).toggle(match);
-                });
-
-                // Ordenamiento
-                if (sort !== 'none') {
-                    const sortedItems = items.sort(function (a, b) {
-                        let aPrice = parseFloat($(a).data('price'));
-                        let bPrice = parseFloat($(b).data('price'));
-                        return sort === 'priceAsc' ? aPrice - bPrice : bPrice - aPrice;
-                    });
-
-                    $('#productList').html(sortedItems);
-                }
-            }
-
-            // Eventos
-            $('#searchInput, #priceFilter, #ratingFilter, #sortFilter').on('input change', filterProducts);
+          $('#loadMoreBtn').on('click', function () {
+            currentPage++;
+            loadProducts();
+          });
         });
+
+        function loadProducts() {
+          $.ajax({
+            url: `${API_ROUTES.products}?page=${currentPage}&pageSize=${pageSize}&search=${currentSearch}`,
+            method: 'GET',
+            success: function (data) {
+              renderProducts(data);
+              if (data.length < pageSize) {
+                $('#loadMoreBtn').hide();
+              } else {
+                $('#loadMoreBtn').show();
+              }
+            },
+            error: function () {
+              console.error('Error cargando productos');
+            }
+          });
+        }
+
+        function loadCarousel() {
+          $.ajax({
+            url: API_ROUTES.carousel,
+            method: 'GET',
+            success: function (data) {
+              renderCarousel(data);
+            },
+            error: function () {
+              console.error('Error cargando promociones');
+            }
+          });
+        }
+
+        function renderProducts(products) {
+          products.forEach(product => {
+            const cardHtml = `
+              <div class="col-md-4 mb-4">
+                <div class="card">
+                  <img src="${product.imagenUrl}" class="card-img-top" alt="${product.nombre}" />
+                  <div class="card-body">
+                    <h5 class="card-title">${product.nombre}</h5>
+                    <p class="card-text">${product.descripcion}</p>
+                    <p class="text-success fw-bold">$${product.precio}</p>
+                    <button class="btn btn-primary add-to-cart" data-id="${product.id}">Agregar al carrito</button>
+                  </div>
+                </div>
+              </div>
+            `;
+            $('#productContainer').append(cardHtml);
+          });
+
+          $('.add-to-cart').off('click').on('click', function () {
+            const productId = $(this).data('id');
+            addToCart(productId);
+          });
+        }
+
+        function renderCarousel(promotions) {
+          $('#carouselItemsContainer').empty();
+          promotions.forEach((item, index) => {
+            $('#carouselItemsContainer').append(`
+              <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                <img src="${item.imagenUrl}" class="d-block w-100" alt="${item.titulo}" />
+                <div class="carousel-caption d-none d-md-block">
+                  <h5>${item.titulo}</h5>
+                  <p>${item.descripcion}</p>
+                </div>
+              </div>
+            `);
+          });
+        }
+
+        function addToCart(productId) {
+          let cart = JSON.parse(localStorage.getItem('cart')) || [];
+          const index = cart.findIndex(p => p.id === productId);
+
+          if (index > -1) {
+            cart[index].cantidad++;
+          } else {
+            cart.push({ id: productId, cantidad: 1 });
+          }
+
+          localStorage.setItem('cart', JSON.stringify(cart));
+          alert('Producto agregado al carrito');
+        }
     </script>
 }
