@@ -16,5 +16,9 @@ namespace KnowCloud.Controllers
         {
             return View();
         }
+        public async Task<IActionResult> ProductCreate()
+        {
+            return View();
+        }
     }
 }

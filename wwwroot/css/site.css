@@ -1,3 +1,13 @@
+:root {
+    --primary-color: #5a189a;
+    --secondary-color: #C14600;
+    --light-color: #f8f9fa;
+    --text-light: #ffffff;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
 html {
   font-size: 14px;
 }
@@ -203,3 +213,67 @@ input[type=file]::file-selector-button {
     text-align: center;
     transition: color .2s ease-in-out;
 }
+.form-control {
+    border: 1px solid #ced4da;
+    border-radius: var(--border-radius);
+    padding: 0.75rem;
+    width: 100%;
+    transition: var(--transition);
+}
+
+    .form-control:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0.2rem rgba(90, 24, 154, 0.25);
+    }
+input[type="text"].form-control {
+    border: 1px solid #ced4da;
+    border-radius: var(--border-radius);
+    padding: 0.25rem 0.5rem; /* más pequeño que 0.75rem */
+    font-size: 0.875rem; /* tamaño de texto más pequeño */
+    width: 100%;
+    transition: var(--transition);
+}
+
+    input[type="text"].form-control:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0.2rem rgba(90, 24, 154, 0.25);
+    }
+input[type="number"].form-control {
+    border: 1px solid #ced4da;
+    border-radius: var(--border-radius);
+    padding: 0.25rem 0.5rem; /* Tamaño reducido */
+    font-size: 0.875rem; /* Equivalente a .form-control-sm */
+    width: 100%;
+    transition: var(--transition);
+}
+
+    input[type="number"].form-control:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0.2rem rgba(90, 24, 154, 0.25);
+    }
+input[type="password"].form-control {
+    border: 1px solid #ced4da;
+    border-radius: var(--border-radius);
+    padding: 0.25rem 0.5rem; /* Tamaño reducido */
+    font-size: 0.875rem; /* Equivalente a .form-control-sm */
+    width: 100%;
+    transition: var(--transition);
+}
+
+    input[type="password"].form-control:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0.2rem rgba(90, 24, 154, 0.25);
+    }
+select.form-control {
+    border: 1px solid #ced4da;
+    border-radius: var(--border-radius);
+    padding: 0.25rem 0.5rem; /* Tamaño pequeño */
+    font-size: 0.875rem; /* Bootstrap sm: ~14px */
+    width: 100%;
+    transition: var(--transition);
+}
+
+    select.form-control:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0.2rem rgba(90, 24, 154, 0.25);
+    }
