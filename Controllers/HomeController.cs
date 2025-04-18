@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using KnowCloud.Models;
 using Microsoft.AspNetCore.Authorization;
 using KnowCloud.Services.Contract;
+using KnowCloud.Models.Dto;
+using Newtonsoft.Json;
 
 namespace KnowCloud.Controllers;
 
@@ -16,9 +18,22 @@ public class HomeController : Controller
         _logger = logger;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
+        List<ProductDto> list = new();
+
+        ResponseDto response = await _productService.GetAllProductsAsync();
+
+        if (response != null && response.IsSuccess)
+        {
+            list = JsonConvert.DeserializeObject<List<ProductDto>>(Convert.ToString(response.Result));
+        }
+        else
+        {
+            TempData["error"] = response?.Message;
+        }
+
+        return View(list);
     }
 
     [Authorize(Policy = "AdminPolicy")]
