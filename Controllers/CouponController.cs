@@ -12,14 +12,16 @@ namespace KnowCloud.Controllers
         private readonly ILogger<HomeController> _logger;
 
       
-        public CouponController(ICouponService couponService)
+        public CouponController(ICouponService couponService, ILogger<HomeController> logger)
         {
             _couponService = couponService;
+            _logger = logger;
         }
 
         [HttpGet]
         public ActionResult Create()
         {
+            _logger.LogInformation("Estamos ingresando a la vista");
             return View();
         }
     }
