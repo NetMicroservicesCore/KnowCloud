@@ -4,8 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Styles {
-
-    <link href="~/css/product-style.css" rel="stylesheet" />
+     <link href="~/css/product-style.css" rel="stylesheet" />
 }
 <div class="product-form-container">
     <h2 class="product-form-title">Crear Nuevo Producto</h2>
@@ -54,6 +53,7 @@
     </form>
 </div>
 <script>
+    //solo falta cargar la validacion del documento  para cuando este ready y se pueda trabajar con el jquery
     // Script para mostrar el nombre del archivo seleccionado
     document.querySelector('input[type="file"]').addEventListener('change', function(e) {
         const fileName = e.target.files[0]?.name || 'Ningún archivo seleccionado';
