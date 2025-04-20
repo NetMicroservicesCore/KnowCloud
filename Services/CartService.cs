@@ -5,6 +5,11 @@ namespace KnowCloud.Services
 {
     public class CartService : ICartService
     {
+        private readonly IBaseService _baseService;
+        public CartService(IBaseService baseService)
+        {
+            _baseService = baseService;
+        }
         public Task<ResponseDto> ApplyCouponAsync(CartDto cartDto)
         {
             throw new NotImplementedException();
@@ -15,9 +20,13 @@ namespace KnowCloud.Services
             throw new NotImplementedException();
         }
 
-        public Task<ResponseDto> GetCartByUserIdAsnyc(string userId)
+        public async Task<ResponseDto> GetCartByUserIdAsnyc(string userId)
         {
-            throw new NotImplementedException();
+            return await _baseService.SendAsync(new RequestDto()
+            {
+                ApiType = Utility.Utilities.ApiType.GET,
+                Url=Utility.Utilities.ShoppingCartAPIBase+"/api/coupon/GetCart"+userId
+            });
         }
 
         public Task<ResponseDto> RemoveFromCartAsync(int cartDetailsId)
