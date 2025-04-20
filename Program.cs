@@ -30,6 +30,7 @@ builder.Services.AddScoped<IAuthServices, AuthServices>();
 builder.Services.AddScoped<ITokenProvider, TokenProvider>();
 builder.Services.AddScoped<ICouponService, CouponService>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ICartService, CartService>();
 //podemos subir archivos a traves del services.
 builder.Services.Configure<FormOptions>(options =>
 {
