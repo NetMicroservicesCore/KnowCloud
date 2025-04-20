@@ -1,6 +1,9 @@
-﻿using KnowCloud.Services.Contract;
+﻿using KnowCloud.Models.Dto;
+using KnowCloud.Services.Contract;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace KnowCloud.Controllers
 {
@@ -15,7 +18,27 @@ namespace KnowCloud.Controllers
         [Authorize]
         public async Task<IActionResult> CartIndex()
         {
-            return View();
+            return View(await LoadCartBaseOnLoggedInUser());
         }
+
+        /// <summary>
+        /// este metodo se encarga de consultar todos los elementos de un carrito de compras de un 
+        /// usuario logeado al sistema
+        /// </summary>
+        /// <returns>una tarea con la entidad del tipo cartDto</returns>
+        private async Task<CartDto> LoadCartBaseOnLoggedInUser()
+        {
+            var userId = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Sub)?.FirstOrDefault()?.Value;
+            ResponseDto? response = await _cartService.GetCartByUserIdAsnyc(userId);
+            if (response != null & response.IsSuccess) 
+            {
+                CartDto cartDto = JsonConvert.DeserializeObject<CartDto>(Convert.ToString(response.Result));
+                return cartDto;
+            }
+            return new CartDto();
+
+        }
+
+
     }
 }
