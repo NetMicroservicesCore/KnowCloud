@@ -154,7 +154,9 @@
                     <div class="p-3">
                         <h5 class="roboto-SemiBold-600 title-morado">@product.Name</h5>
                         <p class="price roboto-Medium-500">@string.Format("{0:c}", product.Price)</p>
-                        <button class="btn btn-outline-primary btn-sm mt-2 roboto-Light-300">Ver detalles</button>
+                        <a asp-action="ProductDetails" asp-route-productId="@product.ProductId"
+                           class="btn btn-outline-primary btn-sm mt-2 roboto-Light-300">Detalles</a>
+                      
                     </div>
                 </div>
             </div>
