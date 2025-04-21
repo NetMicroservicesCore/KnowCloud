@@ -29,7 +29,7 @@ namespace KnowCloud.Services
             });
         }
 
-        public async Task<ResponseDto?> RemoveFromCartAsync(int cartDetailsId)
+        public async Task<ResponseDto> RemoveFromCartAsync(int cartDetailsId)
         {
             return await _baseService.SendAsync(new RequestDto()
             {
@@ -39,7 +39,7 @@ namespace KnowCloud.Services
             });
         }
 
-        public async Task<ResponseDto?> UpsertCartAsync(CartDto cartDto)
+        public async Task<ResponseDto> UpsertCartAsync(CartDto cartDto)
         {
             return await _baseService.SendAsync(new RequestDto()
             {
