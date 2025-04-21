@@ -10,9 +10,14 @@ namespace KnowCloud.Services
         {
             _baseService = baseService;
         }
-        public Task<ResponseDto> ApplyCouponAsync(CartDto cartDto)
+        public async Task<ResponseDto> ApplyCouponAsync(CartDto cartDto)
         {
-            throw new NotImplementedException();
+            return await _baseService.SendAsync(new RequestDto()
+            {
+                ApiType = Utility.Utilities.ApiType.POST,
+                Data = cartDto,
+                Url = Utility.Utilities.ShoppingCartAPIBase + "/api/cart/ApplyCoupon"
+            });
         }
 
         public async Task<ResponseDto> EmailCart(CartDto cartDto)
