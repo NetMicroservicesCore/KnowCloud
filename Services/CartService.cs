@@ -29,14 +29,24 @@ namespace KnowCloud.Services
             });
         }
 
-        public Task<ResponseDto> RemoveFromCartAsync(int cartDetailsId)
+        public async Task<ResponseDto?> RemoveFromCartAsync(int cartDetailsId)
         {
-            throw new NotImplementedException();
+            return await _baseService.SendAsync(new RequestDto()
+            {
+                ApiType = Utility.Utilities.ApiType.POST,
+                Data = cartDetailsId,
+                Url = Utility.Utilities.ShoppingCartAPIBase + "/api/cart/RemoveCart"
+            });
         }
 
-        public Task<ResponseDto> UpsertCartAsync(CartDto cartDto)
+        public async Task<ResponseDto?> UpsertCartAsync(CartDto cartDto)
         {
-            throw new NotImplementedException();
+            return await _baseService.SendAsync(new RequestDto()
+            {
+                ApiType = Utility.Utilities.ApiType.POST,
+                Data = cartDto,
+                Url = Utility.Utilities.ShoppingCartAPIBase + "/api/cart/CartUpsert"
+            });
         }
     }
 }
