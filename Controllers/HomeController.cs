@@ -47,4 +47,30 @@ public class HomeController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
+
+
+
+
+    [Authorize]
+    [HttpGet]
+    public async Task<IActionResult> ProductDetails(int productId)
+    {
+        ProductDto model = new();
+
+        ResponseDto response = await _productService.GetProductByIdAsync(productId);
+
+        if (response != null && response.IsSuccess)
+        {
+            model = JsonConvert.DeserializeObject<ProductDto>(Convert.ToString(response.Result));
+        }
+        else
+        {
+            TempData["error"] = response?.Message;
+        }
+
+        return View(model);
+    }
+
+
+
 }
