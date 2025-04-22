@@ -103,11 +103,13 @@ public class HomeController : Controller
         cartDto.CartDetails = cartDetailsDtos;
 
         //consumimos el microservicio consultando el microservicio por identificador  
-        ResponseDto response = await _productService.GetProductByIdAsync(productId);
+        //actualizamos  el carrito de servicio.
+        ResponseDto response = await _cartService.UpsertCartAsync(cartDto);
+
         if (Response != null && response.IsSuccess)
         {
-            //deserializamos el objeto del microservicio
-            productDto = JsonConvert.DeserializeObject<ProductDto>(Convert.ToString(response.Result));
+            TempData["success"] = "El Item fue agregado al carrito de compra";
+            return RedirectToAction(nameof(Index));
         }
         else {
             TempData["error"] = response?.Message;
