@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using KnowCloud.Services.Contract;
 using KnowCloud.Models.Dto;
 using Newtonsoft.Json;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace KnowCloud.Controllers;
 
@@ -80,7 +81,27 @@ public class HomeController : Controller
     [ActionName("ProductDetails")]
     public async Task<IActionResult> ProductDetails(ProductDto productDto) 
     {
-        ProductDto productDto = new();
+        CartDto cartDto = new CartDto()
+        {
+            CartHeader = new CartHeaderDto
+            {
+                //UserId = User.Claims.Where(u => u.Type == JwtClaimTypes.Subject)?.FirstOrDefault()?.Value
+                UserId = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value
+
+            }
+        };
+
+        CartDetailsDto cartDetailsDto = new CartDetailsDto()
+        {
+            Count = productDto.Count,
+            ProductId = productDto.ProductId
+        };
+        List<CartDetailsDto> cartDetailsDtos = new List<CartDetailsDto>()
+        {
+            cartDetailsDto
+        };
+        cartDto.CartDetails = cartDetailsDtos;
+
         //consumimos el microservicio consultando el microservicio por identificador  
         ResponseDto response = await _productService.GetProductByIdAsync(productId);
         if (Response != null && response.IsSuccess)
