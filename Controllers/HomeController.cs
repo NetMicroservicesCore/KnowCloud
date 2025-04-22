@@ -12,10 +12,14 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private readonly IProductService _productService;
-    public HomeController(IProductService productService, ILogger<HomeController> logger)
+    private readonly ICartService _cartService;
+         
+    public HomeController(ICartService cartService, IProductService productService, ILogger<HomeController> logger)
     {
         _productService = productService;
+        _cartService = cartService;
         _logger = logger;
+
     }
 
     public async Task<IActionResult> Index()
@@ -71,6 +75,23 @@ public class HomeController : Controller
         return View(model);
     }
 
-
+    [Authorize]
+    [HttpPost]
+    [ActionName("ProductDetails")]
+    public async Task<IActionResult> ProductDetails(int productId) 
+    {
+        ProductDto productDto = new();
+        //consumimos el microservicio consultando el microservicio por identificador  
+        ResponseDto response = await _productService.GetProductByIdAsync(productId);
+        if (Response != null && response.IsSuccess)
+        {
+            //deserializamos el objeto del microservicio
+            productDto = JsonConvert.DeserializeObject<ProductDto>(Convert.ToString(response.Result));
+        }
+        else {
+            TempData["error"] = response?.Message;
+        }
+        return View(productDto);
+    }
 
 }
