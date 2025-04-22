@@ -78,7 +78,7 @@ public class HomeController : Controller
     [Authorize]
     [HttpPost]
     [ActionName("ProductDetails")]
-    public async Task<IActionResult> ProductDetails(int productId) 
+    public async Task<IActionResult> ProductDetails(ProductDto productDto) 
     {
         ProductDto productDto = new();
         //consumimos el microservicio consultando el microservicio por identificador  
