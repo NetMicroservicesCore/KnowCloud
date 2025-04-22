@@ -54,8 +54,6 @@ public class HomeController : Controller
     }
 
 
-
-
     [Authorize]
     [HttpGet]
     public async Task<IActionResult> ProductDetails(int productId)
