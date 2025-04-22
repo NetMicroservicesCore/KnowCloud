@@ -98,7 +98,7 @@ public class HomeController : Controller
         {
             cartDetailsDto
         };
-        cartDto.CartDetails = cartDetailsDtos;
+        cartDto.CartDetailsDtos = cartDetailsDtos;
 
         //consumimos el microservicio consultando el microservicio por identificador  
         //actualizamos  el carrito de servicio.

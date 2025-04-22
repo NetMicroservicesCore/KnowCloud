@@ -1,5 +1,5 @@
 ﻿@model KnowCloud.Models.Dto.CartDto
-@if (Model.CartHeader != null && Model.CartDetails?.Count() > 0)
+@if (Model.CartHeader != null && Model.CartDetailsDtos?.Count() > 0)
 {
     <form method="post" asp-action="EmailCart">
         <br />
@@ -35,7 +35,7 @@
                     </div>
                     <hr />
 
-                    @foreach (var cartObj in Model.CartDetails)
+                    @foreach (var cartObj in Model.CartDetailsDtos)
                     {
                         <div class="row h-100">
                             <div class="col-4 col-md-2 text-center py-2">

@@ -21,6 +21,44 @@ namespace KnowCloud.Controllers
             return View(await LoadCartBaseOnLoggedInUser());
         }
 
+        public async Task<IActionResult> Remove(int cartDetailsId) 
+        {
+            var userId = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Sub)?.FirstOrDefault()?.Value;
+            ResponseDto response = await _cartService.RemoveFromCartAsync(cartDetailsId);
+            if (response != null & response.IsSuccess)
+            {
+                TempData["success"] = "El carrito se actualizo correctamente";
+                return RedirectToAction(nameof(CartIndex));
+            }
+            return View();
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveCoupon(CartDto cartDto)
+        {
+            cartDto.CartHeader.CouponCode = "";
+            ResponseDto response = await _cartService.ApplyCouponAsync(cartDto);
+            if (response != null & response.IsSuccess)
+            {
+                TempData["success"]="El carrito se actualizo correctamente";
+                return RedirectToAction(nameof(CartIndex));
+            }
+            return View();
+        }
+        public async Task<IActionResult> AplyCoupon(CartDto cartDto)
+        {
+            
+            ResponseDto response = await _cartService.ApplyCouponAsync(cartDto);
+            if (response != null & response.IsSuccess)
+            {
+                TempData["success"] = "El carrito se actualizo correctamente";
+                return RedirectToAction(nameof(CartIndex));
+            }
+            return View();
+        }
+
+
         /// <summary>
         /// este metodo se encarga de consultar todos los elementos de un carrito de compras de un 
         /// usuario logeado al sistema
