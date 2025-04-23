@@ -16,7 +16,7 @@ namespace KnowCloud.Services
             {
                 ApiType = Utility.Utilities.ApiType.POST,
                 Data = cartDto,
-                Url = Utility.Utilities.ShoppingCartAPIBase + "/api/cart/ApplyCoupon"
+                Url = Utility.Utilities.ShoppingCartAPIBase + "/api/CartApi/ApplyCoupon"
             });
         }
 
@@ -26,7 +26,7 @@ namespace KnowCloud.Services
             {
                 ApiType = Utility.Utilities.ApiType.POST,
                 Data = cartDto,
-                Url = Utility.Utilities.ShoppingCartAPIBase + "/api/cart/EmailCartRequest"
+                Url = Utility.Utilities.ShoppingCartAPIBase + "/api/CartApi/EmailCartRequest"
             });
         }
 
@@ -45,7 +45,7 @@ namespace KnowCloud.Services
             {
                 ApiType = Utility.Utilities.ApiType.POST,
                 Data = cartDetailsId,
-                Url = Utility.Utilities.ShoppingCartAPIBase + "/api/cart/RemoveCart"
+                Url = Utility.Utilities.ShoppingCartAPIBase + "/api/CartApi/RemoveCart"
             });
         }
 

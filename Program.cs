@@ -18,6 +18,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient();
 builder.Services.AddHttpClient<IProductService, ProductService>();
 builder.Services.AddHttpClient<ICouponService, CouponService>();
+builder.Services.AddHttpClient<ICartService, CartService>();
 Utilities.CouponAPIBase = builder.Configuration["ServiceUrls:CouponAPI"];
 Utilities.AuthAPIBase = builder.Configuration["ServiceUrls:AuthAPI"];
 Utilities.ProductAPIBase = builder.Configuration["ServiceUrls:ProductAPI"];

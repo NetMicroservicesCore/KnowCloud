@@ -8,8 +8,8 @@
 }
 <div class="product-container animate-fade">
     <form method="post" asp-action="ProductDetails" asp-controller="Home">
-        <input id="ProductId" name="ProductId" type="hidden" value="@Model.ProductId" />
-
+       @*  <input id="ProductId" name="ProductId" type="hidden" value="@Model.ProductId" /> *@
+        <input asp-for="ProductId" hidden />
         <div class="product-card">
             <div class="product-header">
                 <h1 class="product-title">@Model.Name</h1>
@@ -32,10 +32,11 @@
                             <label class="quantity-label" for="Count">Cantidad:</label>
                             <div class="quantity-control">
                                 <button type="button" class="quantity-btn minus" onclick="decrementQuantity()">-</button>
-                                <input id="Count" name="Count" type="number" value="1" min="1" />
+                                <input id="Count" asp-for="Count" name="Count" type="number" value="1" min="1" />
                                 <button type="button" class="quantity-btn plus" onclick="incrementQuantity()">+</button>
+
                             </div>
-                            <span id="CountValidation" class="form-validation-error"></span>
+                            <span asp-validation-for="Count" class="text-danger"></span>
                         </div>
                     </div>
                 </div>

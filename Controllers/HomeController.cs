@@ -83,7 +83,7 @@ public class HomeController : Controller
         {
             CartHeader = new CartHeaderDto
             {
-                //UserId = User.Claims.Where(u => u.Type == JwtClaimTypes.Subject)?.FirstOrDefault()?.Value
+                
                 UserId = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value
 
             }
