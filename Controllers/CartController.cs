@@ -3,6 +3,7 @@ using KnowCloud.Services.Contract;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.IdentityModel.Tokens.Jwt;
 
 namespace KnowCloud.Controllers
@@ -68,9 +69,10 @@ namespace KnowCloud.Controllers
         {
             var userId = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Sub)?.FirstOrDefault()?.Value;
             ResponseDto response = await _cartService.GetCartByUserIdAsnyc(userId);
-            if (response != null & response.IsSuccess) 
+            if (response != null & response.IsSuccess && response.Result != null)
             {
-                CartDto cartDto = JsonConvert.DeserializeObject<CartDto>(Convert.ToString(response.Result));
+                string jsonResult = JsonConvert.SerializeObject(response.Result);
+                CartDto cartDto = JsonConvert.DeserializeObject<CartDto>(jsonResult); 
                 return cartDto;
             }
             return new CartDto();
