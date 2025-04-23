@@ -34,8 +34,8 @@ namespace KnowCloud.Services
         {
             return await _baseService.SendAsync(new RequestDto()
             {
-                ApiType = Utility.Utilities.ApiType.GET,
-                Url=Utility.Utilities.ShoppingCartAPIBase+"/api/coupon/GetCart"+userId
+                ApiType = Utility.Utilities.ApiType.GET,  ////api/coupon/GetCart
+                Url =Utility.Utilities.ShoppingCartAPIBase+"/api/CartApi/GetCart/"+userId
             });
         }
 
