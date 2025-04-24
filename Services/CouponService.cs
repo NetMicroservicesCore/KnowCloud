@@ -24,7 +24,7 @@ namespace KnowCloud.Services
             {
                 ApiType = Utility.Utilities.ApiType.POST,
                 Data = couponDto,
-                Url = Utility.Utilities.CouponAPIBase + "/api/coupon"
+                Url = Utility.Utilities.CouponAPIBase + "/api/Cupon"
             });
         }
 
@@ -33,7 +33,7 @@ namespace KnowCloud.Services
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = Utility.Utilities.ApiType.DELETE,
-                Url = Utility.Utilities.CouponAPIBase + "/api/coupon/" + id
+                Url = Utility.Utilities.CouponAPIBase + "/api/Cupon/" + id
             });
         }
 
