@@ -42,7 +42,7 @@ namespace KnowCloud.Services
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = Utility.Utilities.ApiType.GET,
-                Url = Utility.Utilities.CouponAPIBase + "/api/coupon"
+                Url = Utility.Utilities.CouponAPIBase + "/api/Cupon"
             });
         }
 
@@ -56,7 +56,7 @@ namespace KnowCloud.Services
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = Utility.Utilities.ApiType.GET,
-                Url = Utility.Utilities.CouponAPIBase + "/api/coupon/GetByCode/" + couponCode
+                Url = Utility.Utilities.CouponAPIBase + "/api/Cupon/GetByCode/"+couponCode
             });
         }
 
@@ -70,7 +70,7 @@ namespace KnowCloud.Services
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = Utility.Utilities.ApiType.GET,
-                Url = Utility.Utilities.CouponAPIBase + "/api/coupon/" + id
+                Url = Utility.Utilities.CouponAPIBase + "/api/Cupon/" + id
             });
         }
 
@@ -85,7 +85,7 @@ namespace KnowCloud.Services
             {
                 ApiType = Utility.Utilities.ApiType.PUT,
                 Data = couponDto,
-                Url = Utility.Utilities.CouponAPIBase + "/api/coupon"
+                Url = Utility.Utilities.CouponAPIBase + "/api/Cupon"
             });
         }
     }
