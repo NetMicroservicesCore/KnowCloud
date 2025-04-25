@@ -65,7 +65,7 @@
                             @if (string.IsNullOrEmpty(Model.CartHeader.CouponCode))
                             {
                                 <span>Coupon:</span>
-                                <input asp-for="CartHeader.CouponCode" />
+                                <input asp-for="CartHeader.CouponCode" class="form-control form-control-sm" />
                                 <button type="submit" asp-action="ApplyCoupon" asp-controller="Cart" class="btn btn-sm btn-success"> Aplicar </button>
                             }
                             else
