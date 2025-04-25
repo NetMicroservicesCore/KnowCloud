@@ -25,7 +25,7 @@ namespace KnowCloud.Controllers
         [Authorize]
         public async Task<IActionResult> Checkout()
         {
-            return View();
+            return View(await LoadCartBaseOnLoggedInUser());
         }
 
 
