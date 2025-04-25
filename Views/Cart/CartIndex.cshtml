@@ -64,15 +64,19 @@
                         <div class="col-6">
                             @if (string.IsNullOrEmpty(Model.CartHeader.CouponCode))
                             {
-                                <span>Coupon:</span>
-                                <input asp-for="CartHeader.CouponCode" class="form-control form-control-sm" />
-                                <button type="submit" asp-action="ApplyCoupon" asp-controller="Cart" class="btn btn-sm btn-success"> Aplicar </button>
+                                <span>Cupon:</span>
+                                <div class="d-flex align-items-center gap-2">
+                                    <input asp-for="CartHeader.CouponCode" class="form-control form-control-sm w-50" />
+                                    <button type="submit" asp-action="AplyCoupon" asp-controller="Cart" class="btn btn-sm btn-success">Aplicar</button>
+                                </div>
                             }
                             else
                             {
-                                <span>Coupon:</span>
-                                <input asp-for="CartHeader.CouponCode" disabled />
-                                <button type="submit" asp-action="RemoveCoupon" asp-controller="Cart" class="btn btn-sm btn-success"> Eliminar </button>
+                                <span>Cupon:</span>
+                                <div class="d-flex align-items-center gap-2">
+                                    <input asp-for="CartHeader.CouponCode" class="form-control form-control-sm w-50" disabled />
+                                    <button type="submit" asp-action="RemoveCoupon" asp-controller="Cart" class="btn btn-sm btn-danger">Eliminar</button>
+                                </div>
                             }
                         </div>
                         <div class="col-6 text-end">
