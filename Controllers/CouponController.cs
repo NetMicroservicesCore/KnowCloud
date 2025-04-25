@@ -1,7 +1,5 @@
 ﻿using KnowCloud.Contract;
 using KnowCloud.Models.Dto;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
