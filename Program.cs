@@ -19,6 +19,7 @@ builder.Services.AddHttpClient();
 builder.Services.AddHttpClient<IProductService, ProductService>();
 builder.Services.AddHttpClient<ICouponService, CouponService>();
 builder.Services.AddHttpClient<ICartService, CartService>();
+builder.Services.AddHttpClient<IOrderService, OrderService>();
 Utilities.CouponAPIBase = builder.Configuration["ServiceUrls:CouponAPI"];
 Utilities.OrderAPIBase = builder.Configuration["ServiceUrls:OrderAPI"];
 Utilities.AuthAPIBase = builder.Configuration["ServiceUrls:AuthAPI"];
@@ -34,6 +35,8 @@ builder.Services.AddScoped<ITokenProvider, TokenProvider>();
 builder.Services.AddScoped<ICouponService, CouponService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+
 //podemos subir archivos a traves del services.
 builder.Services.Configure<FormOptions>(options =>
 {
