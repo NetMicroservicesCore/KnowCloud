@@ -5,9 +5,19 @@ namespace KnowCloud.Services
 {
     public class OrderService : IOrderService
     {
-        public Task<ResponseDto> CreateOrder(CartDto cartDto)
+        private readonly IBaseService _baseService;
+        public OrderService(IBaseService baseService)
         {
-            throw new NotImplementedException();
+            _baseService = baseService;
+        }
+        public async Task<ResponseDto> CreateOrder(CartDto cartDto)
+        {
+            return await _baseService.SendAsync(new RequestDto()
+            {
+                ApiType = Utility.Utilities.ApiType.POST,
+                Data = cartDto,
+                Url = Utility.Utilities.OrderAPIBase + "/api/OrderAPI"
+            });
         }
     }
 }
