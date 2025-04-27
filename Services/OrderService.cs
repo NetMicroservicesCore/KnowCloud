@@ -16,7 +16,7 @@ namespace KnowCloud.Services
             {
                 ApiType = Utility.Utilities.ApiType.POST,
                 Data = cartDto,
-                Url = Utility.Utilities.OrderAPIBase + "/api/OrderAPI"
+                Url = Utility.Utilities.OrderAPIBase + "/api/OrderAPI/CreateOrder"
             });
         }
     }
