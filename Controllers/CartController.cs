@@ -11,9 +11,11 @@ namespace KnowCloud.Controllers
     public class CartController : Controller
     {
         private readonly ICartService _cartService;
-        public CartController(ICartService cartService)
+        private readonly IOrderService _orderService;
+        public CartController(ICartService cartService, IOrderService orderService)
         {
             _cartService = cartService;
+            _orderService = orderService;
         }
 
         [Authorize]
@@ -32,7 +34,18 @@ namespace KnowCloud.Controllers
         [ActionName("Checkout")]
         public async Task<IActionResult> Checkout(CartDto cartDto)
         {
-            return View(await LoadCartBaseOnLoggedInUser());
+            CartDto cart = await LoadCartBaseOnLoggedInUser();
+            cart.CartHeader.Phone = cartDto.CartHeader.Phone;
+            cart.CartHeader.Email = cartDto.CartHeader.Email;
+            cart.CartHeader.Name = cartDto.CartHeader.Name;
+            //actualizamoso creamos la orden del servicio
+            var response = await _orderService.CreateOrder(cart);
+            OrderHeaderDto orderHeaderDto = JsonConvert.DeserializeObject<OrderHeaderDto>(Convert.ToString(response.Result));
+            //PREPARAMOS TODO PARA HACER EL PAGO EN LINEA
+            if (response != null && response.IsSuccess)
+            {
+                //hacemos pasarela de pagos y redireccionamos el stripe  al lugar d ela ordend e trabajo
+            }
         }
 
         public async Task<IActionResult> Remove(int cartDetailsId) 
@@ -95,3 +108,4 @@ namespace KnowCloud.Controllers
 
     }
 }
+
