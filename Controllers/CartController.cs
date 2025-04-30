@@ -31,7 +31,7 @@ namespace KnowCloud.Controllers
         }
 
         [HttpPost]
-        [ActionName("Checkout")]
+        [ActionName("Checkout")] 
         public async Task<IActionResult> Checkout(CartDto cartDto)
         {
             CartDto cart = await LoadCartBaseOnLoggedInUser();
@@ -46,6 +46,7 @@ namespace KnowCloud.Controllers
             {
                 //hacemos pasarela de pagos y redireccionamos el stripe  al lugar d ela ordend e trabajo
             }
+            return View();
         }
 
         public async Task<IActionResult> Remove(int cartDetailsId) 
