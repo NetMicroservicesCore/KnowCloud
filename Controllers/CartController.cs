@@ -24,6 +24,8 @@ namespace KnowCloud.Controllers
             return View(await LoadCartBaseOnLoggedInUser());
         }
 
+        #region  Orden de Compra de la tienda en Linea
+        
         [Authorize]
         public async Task<IActionResult> Checkout()
         {
@@ -48,6 +50,18 @@ namespace KnowCloud.Controllers
             }
             return View();
         }
+        
+        #endregion
+
+        #region Confirmacion de Pago
+
+        [Authorize]
+        public async Task<IActionResult> Confirmation(int orderId)
+        {
+            return View(orderId);
+        }
+        #endregion
+
 
         public async Task<IActionResult> Remove(int cartDetailsId) 
         {

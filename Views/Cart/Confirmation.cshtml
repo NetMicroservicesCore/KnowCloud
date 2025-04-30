@@ -1,0 +1,59 @@
+﻿﻿@model int
+
+@section Styles {
+    <link href="~/css/confirm-order.css" rel="stylesheet" />
+}
+<div class="container">
+    <div class="header">
+        <h1 class="title">¡Gracias por tu pedido!</h1>
+    </div>
+
+    <div class="content">
+        <div class="order-id">
+            Pedido #@Model
+        </div>
+
+        <p class="message">
+            Hemos recibido tu pedido correctamente y tu pago ha sido procesado con éxito.
+        </p>
+
+        <div class="tiempo-estimado">
+            <span class="tiempo-icono">⏱️</span>
+            <span>Tu pedido estará listo en aproximadamente <strong>30 minutos</strong></span>
+        </div>
+
+        <img src="/api/placeholder/400/320" alt="Ilustración de pedido confirmado" class="illustration" />
+
+        <div class="status-container">
+            <div class="status-step">
+                <div class="status-circle">✓</div>
+                <div class="status-label">Pedido Recibido</div>
+            </div>
+            <div class="status-step">
+                <div class="status-line"></div>
+                <div class="status-circle">✓</div>
+                <div class="status-label">Pago Confirmado</div>
+            </div>
+            <div class="status-step">
+                <div class="status-line"></div>
+                <div class="status-circle">⌛</div>
+                <div class="status-label">En Preparación</div>
+            </div>
+            <div class="status-step">
+                <div class="status-line"></div>
+                <div class="status-circle">🔜</div>
+                <div class="status-label">Listo para Recoger</div>
+            </div>
+        </div>
+
+        <div>
+            <a href="#" class="btn">Ver Detalles del Pedido</a>
+            <a href="#" class="btn">Volver a la Tienda</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Si tienes alguna pregunta sobre tu pedido, por favor contáctanos al (555) 123-4567</p>
+        <p>© 2025 Restaurante Delicioso. Todos los derechos reservados.</p>
+    </div>
+</div>
