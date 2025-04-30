@@ -28,6 +28,12 @@ namespace KnowCloud.Controllers
             return View(await LoadCartBaseOnLoggedInUser());
         }
 
+        [HttpPost]
+        [ActionName("Checkout")]
+        public async Task<IActionResult> Checkout(CartDto cartDto)
+        {
+            return View(await LoadCartBaseOnLoggedInUser());
+        }
 
         public async Task<IActionResult> Remove(int cartDetailsId) 
         {
