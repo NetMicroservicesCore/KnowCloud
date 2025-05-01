@@ -1,13 +1,13 @@
 ﻿@model KnowCloud.Models.Dto.CartDto
 
-<form method="post">
+<form method="post" asp-action="Checkout" asp-controller="Cart">
     <input asp-for="CartHeader.UserId" hidden />
     <input asp-for="CartHeader.CartHeaderId" hidden />
     <input asp-for="CartHeader.CouponCode" hidden />
     <input asp-for="CartHeader.Discount" hidden />
     <input asp-for="CartHeader.CartTotal" hidden />
 
-    <div class="border mt-2 p-4 rounded">
+    <div class="border mt-2 p-4 rounded shadow-lg p-3 mb-5 bg-body-tertiary rounded pt-2">
         <div class="container row">
             <div class="col-md-7 col-12">
                 <span style="font-size:25px;" class="roboto-Black-900 title-orange mb-2">Resumen de Orden de Compra</span>
@@ -33,7 +33,7 @@
                     </div>
                     <div class="col-12 pt-2">
                         <label class="col-form-label title-morado roboto-Light-300">
-                            El pedido estará listo 30 minutos después de realizarlo. Si realizas el pedido cuando el restaurante está cerrado, estará listo al día siguiente.
+                            El pedido estará listo 30 minutos después de realizarlo. Si realizas el pedido cuando el proveedor no tiene el producto en stock, estará listo al día siguiente.
                         </label>
                     </div>
 
@@ -61,15 +61,15 @@
                         {
                             <div class="row h-100">
                                 <div class="col-6">
-                                    <span style="font-size:20px" class="roboto-Regular-400 title-morado">@cartObj.ProductDto.Name</span>
+                                    <span style="font-size:20px" class="roboto-Light-300">@cartObj.ProductDto.Name</span>
                                 </div>
 
                                 <div class="col-3" style="font-size:11px;">
-                                    <span style="font-size:17px;" class="roboto-Regular-400 title-morado"> @cartObj.ProductDto.Price.ToString("c")</span>
+                                    <span style="font-size:17px;" class="roboto-Light-300"> @cartObj.ProductDto.Price.ToString("c")</span>
 
                                 </div>
                                 <div class="col-3" style="font-size:11px;">
-                                    <span style="font-size:17px;" class="roboto-Regular-400 title-morado"> @cartObj.Count</span>
+                                    <span style="font-size:17px;" class="roboto-Light-300"> @cartObj.Count</span>
                                 </div>
                             </div>
                             <hr />
