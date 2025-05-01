@@ -10,17 +10,17 @@
     <div class="border mt-2 p-4 rounded">
         <div class="container row">
             <div class="col-md-7 col-12">
-                <span style="font-size:25px;" class="text-warning mb-2">Order Summary</span>
+                <span style="font-size:25px;" class="roboto-Black-900 title-orange mb-2">Resumen de Orden de Compra</span>
             </div>
             <div class="col-md-5 col-12">
-                <a asp-action="CartIndex" class="btn btn-outline-warning form-control">Back to Cart</a>
+                <a asp-action="CartIndex" asp-controller="Cart" class="btn btn-outline-warning form-control">Regresar al Carrito</a>
             </div>
             <br /><br /><br />
             <hr />
             <div class="col-7">
                 <div class="row pt-2">
                     <div class="col-12 py-2">
-                        <input asp-for="CartHeader.Name" placeholder="full name..." class="form-control" />
+                        <input asp-for="CartHeader.Name" placeholder="Nombre..." class="form-control" />
                         <span asp-validation-for="CartHeader.Name" class="text-danger"></span>
                     </div>
                     <div class="col-12 py-2">
@@ -28,11 +28,13 @@
                         <span asp-validation-for="CartHeader.Email" class="text-danger"></span>
                     </div>
                     <div class="col-12 py-2">
-                        <input class="form-control" asp-for="CartHeader.Phone" placeholder="phone number..." />
+                        <input class="form-control" asp-for="CartHeader.Phone" placeholder="numero telefonico..." />
                         <span asp-validation-for="CartHeader.Phone" class="text-danger"></span>
                     </div>
                     <div class="col-12 pt-2">
-                        <label class="col-form-label">Order will be ready in 30minutes after placing order. If you place order when restaurant is closed it will be ready next day.</label>
+                        <label class="col-form-label title-morado roboto-Light-300">
+                            El pedido estará listo 30 minutos después de realizarlo. Si realizas el pedido cuando el restaurante está cerrado, estará listo al día siguiente.
+                        </label>
                     </div>
 
                 </div>
@@ -43,14 +45,14 @@
                         <div class=" d-none d-lg-block">
                             <div class="row text-danger">
                                 <div class="col-6">
-                                    Product Details
+                                    Detalles del Producto
                                 </div>
 
                                 <div class="col-3">
-                                    Price
+                                    Precio
                                 </div>
                                 <div class="col-3">
-                                    Count
+                                    Cantidad
                                 </div>
                             </div>
                         </div>
@@ -59,25 +61,25 @@
                         {
                             <div class="row h-100">
                                 <div class="col-6">
-                                    <span style="font-size:20px">@cartObj.ProductDto.Name</span>
+                                    <span style="font-size:20px" class="roboto-Regular-400 title-morado">@cartObj.ProductDto.Name</span>
                                 </div>
 
                                 <div class="col-3" style="font-size:11px;">
-                                    <span style="font-size:17px;"> @cartObj.ProductDto.Price.ToString("c")</span>
+                                    <span style="font-size:17px;" class="roboto-Regular-400 title-morado"> @cartObj.ProductDto.Price.ToString("c")</span>
 
                                 </div>
                                 <div class="col-3" style="font-size:11px;">
-                                    <span style="font-size:17px;"> @cartObj.Count</span>
+                                    <span style="font-size:17px;" class="roboto-Regular-400 title-morado"> @cartObj.Count</span>
                                 </div>
                             </div>
                             <hr />
                         }
                         <div class="row">
                             <div class="col-12 text-center pr-4 text-danger">
-                                Order Total :  @Model.CartHeader.CartTotal.ToString("c") <br />
+                                Total :  @Model.CartHeader.CartTotal.ToString("c") <br />
                                 @if (Model.CartHeader.Discount > 0)
                                 {
-                                    <span class="text-success"> Order Discount :  @Model.CartHeader.Discount.ToString("c")</span>
+                                    <span class="text-success roboto-Medium-500"> Descuento de Orden :  @Model.CartHeader.Discount.ToString("c")</span>
                                 }
                             </div>
                         </div>
@@ -88,7 +90,7 @@
 
                             <div class="col-12 ">
                                 <button type="submit" class="btn btn-success form-control ">
-                                    <span>Place Order</span>
+                                    <span class="roboto-Regular-400">Confirmar Orden</span>
                                 </button>
                             </div>
                         </div>
