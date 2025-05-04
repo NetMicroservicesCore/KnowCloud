@@ -46,7 +46,20 @@ namespace KnowCloud.Controllers
             //PREPARAMOS TODO PARA HACER EL PAGO EN LINEA
             if (response != null && response.IsSuccess)
             {
-                //hacemos pasarela de pagos y redireccionamos el stripe  al lugar d ela ordend e trabajo
+                //hacemos pasarela de pagos y redireccionamos el stripe  al lugar de la orden de trabajo
+                var domain = Request.Scheme + "://" + Request.Host.Value + "/";
+                StripeRequestDto stripeRequestDto = new()
+                {
+                    ApprovedUrl = domain + "Cart/Confirmation?orderId=" + orderHeaderDto.OrderHeaderId,
+                    CancelUrl = domain + "Cart/Checkout",
+                    OrderHeaderDto = orderHeaderDto
+                };
+                var stripeResponse = await _orderService.CreateStripeSession(stripeRequestDto);
+                StripeRequestDto stripeResponseResult = JsonConvert.DeserializeObject<StripeRequestDto>(Convert.ToString(stripeResponse.Result));
+                //establecemos hacia donde vamos a redireccionar 
+                //nos redirege a la session y url adecuada
+                Response.Headers.Add("Location",stripeResponseResult.StripeSessionUrl);
+                return new StatusCodeResult(303);//este codigo establece que nos va a redireccionar a otro recurso
             }
             return View();
         }
