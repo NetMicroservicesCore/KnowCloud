@@ -1,4 +1,5 @@
 ﻿using KnowCloud.Models.Dto;
+using Microsoft.AspNetCore.Mvc;
 
 namespace KnowCloud.Services.Contract
 {
@@ -6,5 +7,7 @@ namespace KnowCloud.Services.Contract
     {
         Task<ResponseDto> CreateOrder(CartDto cartDto);
         Task<ResponseDto> CreateStripeSession(StripeRequestDto stripeRequestDto);
+
+        Task<ResponseDto> ValidateStripeSession(int orderHeaderId);
     } 
 }
