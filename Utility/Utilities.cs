@@ -22,5 +22,14 @@
             Json,
             MultipartFormData,
         }
+
+        public const string Status_Pending = "Pendiente";
+        public const string Status_Approved = "Aprovado";
+        public const string Status_ReadyForPickup = "Listo para Recoger";
+        public const string Status_Completed = "Completo";
+        public const string Status_Refunded = "Regresado";
+        public const string Status_Cancelled = "Cancelado";
+
+
     }
 }
