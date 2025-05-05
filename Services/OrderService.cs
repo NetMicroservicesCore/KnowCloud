@@ -29,5 +29,15 @@ namespace KnowCloud.Services
                 Url = Utility.Utilities.OrderAPIBase + "/api/OrderAPI/CreateStripeSession"
             });
         }
+
+        public async Task<ResponseDto> ValidateStripeSession(int orderHeaderId)
+        {
+            return await _baseService.SendAsync(new RequestDto()
+            {
+                ApiType = Utility.Utilities.ApiType.POST,
+                Data = orderHeaderId,
+                Url = Utility.Utilities.OrderAPIBase + "/api/OrderAPI/ValidateStripeSession"
+            });
+        }
     }
 }
