@@ -71,7 +71,21 @@ namespace KnowCloud.Controllers
         [Authorize]
         public async Task<IActionResult> Confirmation(int orderId)
         {
+            ResponseDto responseDto = await _orderService.ValidateStripeSession(orderId);
+            if (responseDto != null && responseDto.IsSuccess)
+            {
+                //como la url de stripe devuelve el status de intento de pago debemos deserialziar el objeto que envia stripe a traves de nuestra api
+                OrderHeaderDto orderHeader = JsonConvert.DeserializeObject<OrderHeaderDto>(Convert.ToString(responseDto.Result));
+                if (orderHeader.Status == Utility.Utilities.Status_Approved)
+                {
+                    return View(orderId);
+                }
+                
+            }
+            //redirigimos alguna pagina de error basado en el status de stripe.
             return View(orderId);
+
+
         }
         #endregion
 
