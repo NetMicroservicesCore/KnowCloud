@@ -42,7 +42,13 @@ namespace KnowCloud.Controllers
         }
 
 
-
+        public async Task<IActionResult> OrderDetail(int orderId)
+        {
+            OrderHeaderDto orderHeaderDto = new OrderHeaderDto();
+            //utilizamos el null condicional
+            string userId = User.Claims.Where(u=>u.Type==JwtRegisteredClaimNames.Sub).FirstOrDefault()?.Value;
+            var response = await _orderService.GetOrder(orderId);
+        }
 
     }
 }
