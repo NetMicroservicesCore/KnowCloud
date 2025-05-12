@@ -48,6 +48,14 @@ namespace KnowCloud.Controllers
             //utilizamos el null condicional
             string userId = User.Claims.Where(u=>u.Type==JwtRegisteredClaimNames.Sub).FirstOrDefault()?.Value;
             var response = await _orderService.GetOrder(orderId);
+            if (response != null && response.IsSuccess)
+            {
+                orderHeaderDto = JsonConvert.DeserializeObject<OrderHeaderDto>(Convert.ToString(response.Result));
+            }
+            if (!User.IsInRole(Utility.Utilities.RoleAdmin) && userId != orderHeaderDto.UserId)
+            {
+                return NotFound();
+            }
         }
 
     }
