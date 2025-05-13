@@ -8,7 +8,7 @@
         public static string OrderAPIBase { get; set; }
         public static string ProductAPIBase { get; set; }
         public const string TokenCookie = "JWTToken";
-        public const string RoleAdmin = "ADMIN";
+        public const string RoleAdmin = "ADMINISTRADOR";
         public const string RoleCustomer = "CUSTOMER";
         public enum ApiType {
             GET,
