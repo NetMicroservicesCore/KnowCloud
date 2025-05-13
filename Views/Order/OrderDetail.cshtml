@@ -108,16 +108,16 @@
                             {
                                 @if (Model.Status == Utilities.Status_Approved)
                                 {
-                                    <button asp-action="OrderReadyForPickup" asp-route-orderId="@Model.OrderHeaderId" type="submit" class="btn btn-success form-control my-1">Ready for Pickup</button>
+                                    <button asp-action="OrderReadyForPickup" asp-route-orderId="@Model.OrderHeaderId" type="submit" class="btn btn-success form-control my-1">Recoger Pedido</button>
                                 }
                                 @if (Model.Status == Utilities.Status_ReadyForPickup)
                                 {
-                                    <button asp-action="CompleteOrder" asp-route-orderId="@Model.OrderHeaderId" type="submit" class="btn btn-success form-control my-1">Complete Order</button>
+                                    <button asp-action="CompleteOrder" asp-route-orderId="@Model.OrderHeaderId" type="submit" class="btn btn-success form-control my-1">Orden Completa</button>
                                 }
 
                                 if (Model.Status == Utilities.Status_Approved || Model.Status == Utilities.Status_ReadyForPickup)
                                 {
-                                    <button asp-action="CancelOrder" asp-route-orderId="@Model.OrderHeaderId" type="submit" class="btn btn-danger form-control my-1">Cancel Order</button>
+                                    <button asp-action="CancelOrder" asp-route-orderId="@Model.OrderHeaderId" type="submit" class="btn btn-danger form-control my-1">Cancelar Order</button>
                                 }
                             }
                         </div>
