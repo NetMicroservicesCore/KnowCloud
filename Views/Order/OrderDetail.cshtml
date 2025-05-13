@@ -5,13 +5,13 @@
     <input asp-for="OrderHeaderId" hidden />
     <div class="container">
         <div class="card">
-            <div class="card-header bg-dark text-light ml-0">
+            <div class="card-header text-light ml-0" style="background-color:#5a189a;">
                 <div class="container row">
                     <div class="col-12 d-none d-md-block col-md-6 pb-1 text-warning h3">
-                        Order Summary
+                        <span class="roboto-Medium-500" style="color:#fff;">Resumen del Pedido</span>
                     </div>
                     <div class="col-12 col-md-4 offset-md-2 text-right mt-2">
-                        <a asp-action="OrderIndex" class="btn btn-warning form-control btn-sm">Back to Orders</a>
+                        <a asp-action="OrderIndex" class="btn form-control btn-sm" style="background-color:#C14600;color:#fff;">Regresar a las Ordenes</a>
                     </div>
                 </div>
             </div>
@@ -20,27 +20,27 @@
                     <div class="row">
                         <div class="col-12 col-lg-6 pb-4">
                             <div class="row my-1">
-                                <div class="col-3">Name</div>
+                                <div class="col-3"><span class="roboto-Light-300 title-morado">Nombre:</span></div>
                                 <div class="col-9">
                                     <input asp-for="Name" readonly class="form-control" />
                                 </div>
                             </div>
 
                             <div class="row my-1">
-                                <div class="col-3">Phone</div>
+                                <div class="col-3"><span class="roboto-Light-300 title-morado">Telefono:</span></div>
                                 <div class="col-9">
                                     <input asp-for="Phone" readonly class="form-control" />
                                 </div>
                             </div>
 
                             <div class="row my-1">
-                                <div class="col-3">Email</div>
+                                <div class="col-3"><span class="roboto-Light-300 title-morado">Email:</span></div>
                                 <div class="col-9">
                                     <input asp-for="Email" readonly class="form-control" />
                                 </div>
                             </div>
                             <div class="row my-1">
-                                <div class="col-3">Order Date</div>
+                                <div class="col-3"><span class="roboto-Light-300 title-morado">Fecha de la Orden:</span></div>
                                 <div class="col-9">
                                     <input value="@Model.OrderTime.ToShortDateString()" readonly class="form-control" />
                                 </div>
@@ -49,20 +49,20 @@
                             @if (User.IsInRole(Utilities.RoleAdmin))
                             {
                                 <div class="row my-1">
-                                    <div class="col-3">Session ID</div>
+                                    <div class="col-3"><span class="roboto-Light-300 title-morado">Session ID:</span></div>
                                     <div class="col-9">
                                         <input asp-for="StripeSessionId" readonly class="form-control" />
                                     </div>
                                 </div>
                                 <div class="row my-1">
-                                    <div class="col-3">Payment Intent ID</div>
+                                    <div class="col-3"><span class="roboto-Light-300 title-morado">Intento de Pago:</span></div>
                                     <div class="col-9">
                                         <input asp-for="PaymentIntentId" readonly class="form-control" />
                                     </div>
                                 </div>
                             }
                             <div class="row my-1">
-                                <div class="col-3">Order Status</div>
+                                <div class="col-3"><span class="roboto-Light-300 title-morado">Status de la Orden:</span></div>
                                 <div class="col-9">
                                     <input asp-for="Status" readonly class="form-control" />
                                 </div>
@@ -71,9 +71,9 @@
                         </div>
                         <div class="col-12 col-lg-5 offset-lg-1">
                             <h4 class="d-flex justify-content-between align-items-center mb-3">
-                                <span class="text-warning">Order Summary</span>
+                                <span class="text-warning"><span class="roboto-Light-300 title-orange">Resumen de la Orden</span></span>
                             </h4>
-                            <label class="bg-info text-dark text-center form-control my-2">Order Status - @Model.Status</label>
+                            <label class="text-center form-control my-2" style="color:#fff; background-color:#C14600;">Status de la Orden - @Model.Status</label>
 
                             <ul class="list-group mb-3">
                                 @foreach (var detail in Model.OrderDetailsDto)
@@ -83,8 +83,8 @@
                                             <div class="col-8">
 
                                                 <h6 class="my-0 text-white-50">@detail.ProductName</h6>
-                                                <small class="text-muted">Price : @detail.Price.ToString("c")</small><br />
-                                                <small class="text-muted">Quantity : @detail.Count</small>
+                                                <small class="text-muted">Precio : @detail.Price.ToString("c")</small><br />
+                                                <small class="text-muted">Cantidad : @detail.Count</small>
                                             </div>
                                             <div class="col-4 text-end">
                                                 <p class="text-success">@((detail.Count * detail.Price).ToString("c"))</p>
