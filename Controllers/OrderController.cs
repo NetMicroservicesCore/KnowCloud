@@ -56,6 +56,7 @@ namespace KnowCloud.Controllers
             {
                 return NotFound();
             }
+            return View(orderHeaderDto);
         }
 
     }
