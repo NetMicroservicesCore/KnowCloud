@@ -30,16 +30,16 @@
 		</div>
 		<ul class="list-group list-group-horizontal-sm pt-2">
 			<a style="text-decoration:none" asp-controller="Order" asp-action="OrderIndex" asp-route-status="approved">
-			<li class="list-group-item">Aprobadas</li>
+			<li class="list-group-item @approved">Aprobadas</li>
 			</a>
 			<a style="text-decoration:none" asp-controller="Order" asp-action="OrderIndex" asp-route-status="readyforpickup">
-			<li class="list-group-item">Listo para Recoger</li>
+			<li class="list-group-item @readyforpickup">Listo para Recoger</li>
 			</a>
 			<a style="text-decoration:none" asp-controller="Order" asp-action="OrderIndex" asp-route-status="cancelled">
-			<li class="list-group-item">Canceladas</li>
+			<li class="list-group-item @cancelled">Canceladas</li>
 			</a>
 			<a style="text-decoration:none" asp-controller="Order" asp-action="OrderIndex" asp-route-status="all">
-			<li class="list-group-item">Todas</li>
+			<li class="list-group-item @all">Todas</li>
 			</a>
 		</ul>
 	</div>
