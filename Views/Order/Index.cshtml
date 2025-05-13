@@ -1,20 +1,20 @@
 ﻿<div class="card shadow border-0 mt-4">
 	<div class="card-header bg-secondary bg-gradient ml-0 py-3 d-flex justify-content-between">
 		<div class="row">
-			<h1 class="text-white roboto-Bold-700">Order List</h1>
+			<h1 class="text-white roboto-Regular-400">Ordenes de Compra</h1>
 		</div>
 		<ul class="list-group list-group-horizontal-sm pt-2">
 			<a style="text-decoration:none" asp-controller="Order" asp-action="OrderIndex" asp-route-status="approved">
-			<li class="list-group-item">Approved</li>
+			<li class="list-group-item">Aprobadas</li>
 			</a>
 			<a style="text-decoration:none" asp-controller="Order" asp-action="OrderIndex" asp-route-status="readyforpickup">
-			<li class="list-group-item">Ready for Pikcup</li>
+			<li class="list-group-item">Listo para Recoger</li>
 			</a>
 			<a style="text-decoration:none" asp-controller="Order" asp-action="OrderIndex" asp-route-status="cancelled">
-			<li class="list-group-item">Cancelled</li>
+			<li class="list-group-item">Canceladas</li>
 			</a>
 			<a style="text-decoration:none" asp-controller="Order" asp-action="OrderIndex" asp-route-status="all">
-			<li class="list-group-item">All</li>
+			<li class="list-group-item">Todas</li>
 			</a>
 		</ul>
 	</div>
@@ -22,13 +22,13 @@
 		<table id="tblData" class="table table-bordered table-striped pt-3" style="width:100%">
 			<thead>
 				<tr>
-					<th>ID</th>
-					<th>Email</th>
-					<th>Name</th>
-					<th>Phone</th>
-					<th>Status</th>
-					<th>Total</th>
-					<th></th>
+					<th class="roboto-Light-300">ID</th>
+					<th class="roboto-Light-300">Email</th>
+					<th class="roboto-Light-300">Nombre</th>
+					<th class="roboto-Light-300">Telefono</th>
+					<th class="roboto-Light-300">Status</th>
+					<th class="roboto-Light-300">Total</th>
+					<th class="roboto-Light-300">Acciones</th>
 				</tr>
 			</thead>
 		</table>
