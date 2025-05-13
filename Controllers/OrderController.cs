@@ -60,8 +60,8 @@ namespace KnowCloud.Controllers
         }
 
 
-        [HttpPost("OrderReadyForPickup")]
-        public async Task<IActionResult> OrderReadyForPickup(int orderId)
+        [HttpPost("CompleteOrder")]
+        public async Task<IActionResult> CompleteOrder(int orderId)
         {
             var response = await _orderService.UpdateOrderStatus(orderId,Utility.Utilities.Status_ReadyForPickup);
             if (response != null && response.IsSuccess)
@@ -72,6 +72,17 @@ namespace KnowCloud.Controllers
             return View();
         }
 
+        [HttpPost("OrderReadyForPickup")]
+        public async Task<IActionResult> OrderReadyForPickup(int orderId)
+        {
+            var response = await _orderService.UpdateOrderStatus(orderId, Utility.Utilities.Status_ReadyForPickup);
+            if (response != null && response.IsSuccess)
+            {
+                TempData["success"] = "El status fue actualizado exitosamente";
+                return RedirectToAction(nameof(OrderDetail), new { orderId = orderId });
+            }
+            return View();
+        }
 
     }
 }
