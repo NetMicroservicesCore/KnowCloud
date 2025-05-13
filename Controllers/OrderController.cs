@@ -21,7 +21,7 @@ namespace KnowCloud.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public IActionResult GetAll(string status)
         {
             IEnumerable<OrderHeaderDto> listado;
             string userId = string.Empty;
@@ -33,6 +33,19 @@ namespace KnowCloud.Controllers
             if (response != null && response.IsSuccess)
             {
                 listado = JsonConvert.DeserializeObject<List<OrderHeaderDto>>(Convert.ToString(response.Result));
+                switch (status) 
+                {
+                    case "approved":
+                        listado = listado.Where(u=> u.Status == Utility.Utilities.Status_Approved);
+                        break;
+                    case "readyforpickup":
+                        listado = listado.Where(u => u.Status == Utility.Utilities.Status_ReadyForPickup);
+                        break;
+                    case "cancelled":
+                        listado = listado.Where(u => u.Status == Utility.Utilities.Status_Cancelled);
+                        break;
+
+                }
             }
             else 
             {
