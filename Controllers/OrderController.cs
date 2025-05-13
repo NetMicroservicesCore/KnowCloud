@@ -44,6 +44,8 @@ namespace KnowCloud.Controllers
                     case "cancelled":
                         listado = listado.Where(u => u.Status == Utility.Utilities.Status_Cancelled);
                         break;
+                    default:
+                        break;
 
                 }
             }

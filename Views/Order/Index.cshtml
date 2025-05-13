@@ -1,4 +1,29 @@
-﻿<div class="card shadow border-0 mt-4">
+﻿@{
+	var status = Context.Request.Query["status"];
+	var approved = "";
+	var readyforpickup = "";
+	var cancelled = "";
+	var all = "";
+
+	switch (status)
+	{
+		case "approved":
+			approved = "active text-white bg-secondary";
+			break;
+		case "readyforpickup":
+			readyforpickup = "active text-white bg-secondary";
+			break;
+		case "cancelled":
+			cancelled = "active text-white bg-secondary";
+			break;
+		default:
+			all = "active text-white bg-secondary";
+			break;
+	}
+}
+
+
+<div class="card shadow border-0 mt-4">
 	<div class="card-header bg-secondary bg-gradient ml-0 py-3 d-flex justify-content-between">
 		<div class="row">
 			<h1 class="text-white roboto-Regular-400">Ordenes de Compra</h1>
