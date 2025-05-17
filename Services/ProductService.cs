@@ -23,6 +23,7 @@ namespace KnowCloud.Services
                 ApiType =Utility.Utilities.ApiType.POST,
                 Data = productDto,
                 Url= Utility.Utilities.ProductAPIBase+"/api/product",
+                //en caso de que el request contenga una peticion con un archivo se pasa como parametro.
                 ContentType = Utility.Utilities.ContentType.MultipartFormData
             });
         }
