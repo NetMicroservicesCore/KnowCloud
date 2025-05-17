@@ -51,6 +51,7 @@ namespace KnowCloud.Services
                         var value = prop.GetValue(requestDto.Data);
                         if (value is FormFile)
                         {
+                            //realizamos un upcasting para obtener el valor que viene dentro del FormFile
                             var file = (FormFile)value;
                             if (file != null)
                             {
