@@ -10,6 +10,7 @@ namespace KnowCloud.Models.Dto
         public object Data { get; set; }
         public string AccessToken { get; set; }
 
+        //esta propiedad nos sirve para utilizarse a trabajar con documentos o imagenes y transportar sus datos.
         public ContentType ContentType { get; set; } = ContentType.Json;
     }
 }
