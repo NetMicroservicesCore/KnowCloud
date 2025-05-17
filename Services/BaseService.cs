@@ -29,7 +29,8 @@ namespace KnowCloud.Services
                 }
                 else
                 {
-                    message.Headers.Add("Accept", "application/json");
+                    //establecemos que culquier tipo de dato se procese, ya sea json o una imagen
+                    message.Headers.Add("Accept", "*/*");
                 }
                 //token
                 if (withBearer)
