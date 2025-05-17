@@ -41,6 +41,7 @@ namespace KnowCloud.Services
 
                 message.RequestUri = new Uri(requestDto.Url);
 
+                ///ocupamos el if condicional para saber si el reuqest tiene  un archivo de por medio dentro del body de la peticion.
                 if (requestDto.ContentType == ContentType.MultipartFormData)
                 {
                     var content = new MultipartFormDataContent();
