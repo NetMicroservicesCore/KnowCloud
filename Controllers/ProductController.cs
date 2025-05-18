@@ -54,5 +54,12 @@ namespace KnowCloud.Controllers
         }
 
 
+        public async Task<IActionResult> ProductEdit(int productId)
+        {
+            return View();
+        }
+
+
+
     }
 }
