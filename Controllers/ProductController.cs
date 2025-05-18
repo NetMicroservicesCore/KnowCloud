@@ -1,5 +1,7 @@
-﻿using KnowCloud.Services.Contract;
+﻿using KnowCloud.Models.Dto;
+using KnowCloud.Services.Contract;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace KnowCloud.Controllers
 {
@@ -12,8 +14,19 @@ namespace KnowCloud.Controllers
             _productService = productService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            List<ProductDto>? productos = new();
+            //aqui yo meteria mejor una consulta de traer solo cierta cantidad de elementos para no cargar toda la tienda en linea
+            ResponseDto? response = await _productService.GetAllProductsAsync();
+            if (response != null && response.IsSuccess)
+            {
+                productos = JsonConvert.DeserializeObject<List<ProductDto>>(Convert.ToString(response.Result));
+            }
+            else 
+            {
+                TempData["error"] = response?.Message;
+            }
             return View();
         }
         public async Task<IActionResult> ProductCreate()
