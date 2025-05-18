@@ -33,5 +33,26 @@ namespace KnowCloud.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> ProductCreate(ProductDto productDto)
+        {
+            if (ModelState.IsValid) 
+            {
+                ResponseDto? response = await _productService.CreateProductsAsync(productDto);
+                if (response != null && response.IsSuccess)
+                {
+                    TempData["success"] = "El producto se creo de forma correcta";
+                    return RedirectToAction(nameof(Index));
+                }
+                else 
+                {
+                    TempData["error"] = response?.Message;
+                }
+            }
+            return View(productDto);
+        }
+
+
     }
 }
