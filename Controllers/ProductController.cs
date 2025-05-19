@@ -62,7 +62,7 @@ namespace KnowCloud.Controllers
             return View(productId);
         }
 
-
+        [HttpGet]
         public async Task<IActionResult> All()
         {
             List<ProductDto>? productos = new();

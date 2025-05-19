@@ -22,7 +22,7 @@ function loadDataTable() {
                     </div>`
                 },
                 "width": "10%"
-            }
+            },
         ],
     })
 }
