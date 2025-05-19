@@ -2,7 +2,7 @@
 
 <form asp-action="ProductEdit" enctype="multipart/form-data">
     <div class="container mt-5 p-4 rounded shadow-lg" style="background-color: #5a189a;">
-        <h2 class="text-center text-white mb-4">Edit Product</h2>
+        <h2 class="text-center text-white mb-4">Editar Producto</h2>
         <input type="hidden" asp-for="ProductId" />
 
         <div class="row">
@@ -10,7 +10,7 @@
 
                 <!-- Name -->
                 <div class="form-group row mb-3">
-                    <label class="col-sm-2 col-form-label text-white fs-5">Name</label>
+                    <label class="col-sm-2 col-form-label text-white fs-5">Nombre</label>
                     <div class="col-sm-10">
                         <input asp-for="Name" class="form-control" placeholder="Enter product name" />
                         <span asp-validation-for="Name" class="text-warning small"></span>
@@ -19,7 +19,7 @@
 
                 <!-- Category -->
                 <div class="form-group row mb-3">
-                    <label class="col-sm-2 col-form-label text-white fs-5">Category</label>
+                    <label class="col-sm-2 col-form-label text-white fs-5">Categoria</label>
                     <div class="col-sm-10">
                         <input asp-for="CategoryName" class="form-control" placeholder="Enter category" />
                         <span asp-validation-for="CategoryName" class="text-warning small"></span>
@@ -28,7 +28,7 @@
 
                 <!-- Description -->
                 <div class="form-group row mb-3">
-                    <label class="col-sm-2 col-form-label text-white fs-5">Description</label>
+                    <label class="col-sm-2 col-form-label text-white fs-5">Descripción</label>
                     <div class="col-sm-10">
                         <textarea asp-for="Description" class="form-control" rows="4" placeholder="Enter description..."></textarea>
                         <span asp-validation-for="Description" class="text-warning small"></span>
@@ -37,7 +37,7 @@
 
                 <!-- Price -->
                 <div class="form-group row mb-3">
-                    <label class="col-sm-2 col-form-label text-white fs-5">Price</label>
+                    <label class="col-sm-2 col-form-label text-white fs-5">Precio</label>
                     <div class="col-sm-10">
                         <input asp-for="Price" class="form-control" placeholder="e.g. 19.99" />
                         <span asp-validation-for="Price" class="text-warning small"></span>
@@ -46,7 +46,7 @@
 
                 <!-- Image Upload -->
                 <div class="form-group row mb-3">
-                    <label class="col-sm-2 col-form-label text-white fs-5">Image</label>
+                    <label class="col-sm-2 col-form-label text-white fs-5">Imagen</label>
                     <div class="col-sm-10">
                         <input asp-for="Image" type="file" class="form-control" />
                         <input asp-for="ImageUrl" type="hidden" />
@@ -59,12 +59,12 @@
                 <div class="row mt-4">
                     <div class="col-md-6">
                         <a asp-action="ProductIndex" class="btn form-control text-white" style="background-color: #C14600;">
-                            ⬅ Back to List
+                            ⬅ Regresar
                         </a>
                     </div>
                     <div class="col-md-6">
                         <button type="submit" class="btn form-control text-white" style="background-color: #00b894;">
-                            ✅ Update Product
+                            ✅ Actualizar Producto
                         </button>
                     </div>
                 </div>
