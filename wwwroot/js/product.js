@@ -21,7 +21,7 @@ function loadDataTable() {
                 data: 'productId',
                 "render": function (data) {
                     return `<div class="w-75 btn-group" role="group">
-                    <a href="/api/Product/ProductEdit?productId=${data}" class="btn btn-primary mx-2"><i class="fas fa-edit"></i></a>
+                    <a href="/Product/ProductEdit?productId=${data}" class="btn btn-primary mx-2"><i class="fas fa-edit"></i></a>
                     </div>`
                 },
                 "width": "10%"

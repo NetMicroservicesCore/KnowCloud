@@ -54,13 +54,22 @@ namespace KnowCloud.Controllers
             return View(productDto);
         }
 
-
-        [HttpPut]
-        [Authorize(Roles ="ADMINISTRADOR")]
         public async Task<IActionResult> ProductEdit(int productId)
         {
-            return View(productId);
+            ResponseDto? response = await _productService.GetProductByIdAsync(productId);
+
+            if (response != null && response.IsSuccess)
+            {
+                ProductDto? model = JsonConvert.DeserializeObject<ProductDto>(Convert.ToString(response.Result));
+                return View(model);
+            }
+            else
+            {
+                TempData["error"] = response?.Message;
+            }
+            return NotFound();
         }
+
 
         [HttpGet]
         public async Task<IActionResult> All()
