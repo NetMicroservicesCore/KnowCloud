@@ -7,7 +7,10 @@ $(document).ready(function () {
 function loadDataTable() {
     dataTable = $('#tblData').DataTable({
         order: [[0, 'desc']],
-        "ajax": { url: "/api/Product"},
+        "ajax": { url: "/Product/All" },
+        "error": function (xhr, error, thrown) {
+            console.log("XHR:", xhr.responseText);
+        },
         "columns": [
             { data: 'productId', "width": "5%" },
             { data: 'name', "width": "25%" },
