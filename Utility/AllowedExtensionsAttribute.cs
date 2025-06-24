@@ -24,7 +24,6 @@ namespace KnowCloud.Utility
                     return new ValidationResult("Esta extension no esta permitida");
                 }
             }
-
             return ValidationResult.Success;
         }
     }

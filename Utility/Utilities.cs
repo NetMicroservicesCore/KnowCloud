@@ -16,7 +16,6 @@
             PUT,
             DELETE
         }
-
         /// <summary>
         /// Esta  propiedad nos sirve para poder recibir dos tipos de datos 1.-Json y 2.-Un archivo en binario
         /// </summary>
@@ -25,14 +24,11 @@
             Json,
             MultipartFormData,
         }
-
         public const string Status_Pending = "Pendiente";
         public const string Status_Approved = "Aprovado";
         public const string Status_ReadyForPickup = "Listo para Recoger";
         public const string Status_Completed = "Completo";
         public const string Status_Refunded = "Regresado";
         public const string Status_Cancelled = "Cancelado";
-
-
     }
 }
