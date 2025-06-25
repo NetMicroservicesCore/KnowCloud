@@ -147,6 +147,19 @@ namespace KnowCloud.Controllers
         }
 
 
+        [HttpPost]
+        public async Task<IActionResult> EmailCart(CartDto cartDto)
+        {
+            ResponseDto? response = await _cartService.EmailCart(cartDto);
+            if (response != null & response.IsSuccess)
+            {
+                TempData["success"] = "El carrito fue actualizado correctamente";
+                return RedirectToAction(nameof(CartIndex));
+            }
+            return View();
+        }
+
+
     }
 }
 
