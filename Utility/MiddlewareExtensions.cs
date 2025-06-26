@@ -18,16 +18,13 @@
             // Autenticación y autorización en el orden correcto
             app.UseAuthentication();
             app.UseAuthorization();
-
             // Manejo de errores HTTP
             app.UseStatusCodePagesWithRedirects("/Account/Denied");
-
-            // Configuración de rutas
+                        // Configuración de rutas
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Account}/{action=Login}/{id?}"
             );
-
             // Carga de archivos estáticos si existen
             app.MapStaticAssets();
         }
