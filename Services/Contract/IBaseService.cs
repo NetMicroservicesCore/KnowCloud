@@ -4,6 +4,7 @@ namespace KnowCloud.Services.Contract
 {
     public interface IBaseService
     {
-        Task<ResponseDto> SendAsync(RequestDto requestDto, bool withBearer = true);
+        Task<ResponseDto> SendAsync(RequestDto requestDto,
+            bool withBearer = true);
     }
 }
