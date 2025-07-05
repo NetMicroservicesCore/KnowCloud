@@ -64,11 +64,14 @@ namespace KnowCloud.Controllers
             OrderHeaderDto orderHeaderDto = new OrderHeaderDto();
             //utilizamos el null condicional
             string userId = User.Claims.Where(u=>u.Type==JwtRegisteredClaimNames.Sub).FirstOrDefault()?.Value;
+
+            //obtenemos el orderHeaderDto
             var response = await _orderService.GetOrder(orderId);
             if (response != null && response.IsSuccess)
             {
                 orderHeaderDto = JsonConvert.DeserializeObject<OrderHeaderDto>(Convert.ToString(response.Result));
             }
+            //validamos el rol del usuario.
             if (!User.IsInRole(Utility.Utilities.RoleAdmin) && userId != orderHeaderDto.UserId)
             {
                 return NotFound();
