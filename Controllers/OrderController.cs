@@ -25,10 +25,12 @@ namespace KnowCloud.Controllers
         {
             IEnumerable<OrderHeaderDto> listado;
             string userId = string.Empty;
+            //obtenemos los roles del usuario que vienen junto con los datos del token
             if (!User.IsInRole(Utility.Utilities.RoleAdmin))
             {
                 userId = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Sid)?.FirstOrDefault()?.Value;
             }
+            //si el usuario es admin, no necesitamos el userId
             ResponseDto response = _orderService.GetAllOrder(userId).GetAwaiter().GetResult();
             if (response != null && response.IsSuccess)
             {
