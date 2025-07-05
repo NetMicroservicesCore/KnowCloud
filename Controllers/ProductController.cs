@@ -8,7 +8,10 @@ namespace KnowCloud.Controllers
 {
     public class ProductController : Controller
     {
-        
+        /// <summary>
+        /// Inyectamos el iproductservice como parte de la inyeccion de dependencias,
+        /// </summary>
+
         private readonly IProductService _productService;
         public ProductController(IProductService productService)
         {
