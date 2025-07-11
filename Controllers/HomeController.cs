@@ -15,20 +15,18 @@ public class HomeController : Controller
     private readonly IProductService _productService;
     private readonly ICartService _cartService;
          
-    public HomeController(ICartService cartService, IProductService productService, ILogger<HomeController> logger)
+    public HomeController(ICartService cartService, IProductService productService,
+        ILogger<HomeController> logger)
     {
         _productService = productService;
         _cartService = cartService;
         _logger = logger;
 
     }
-
     public async Task<IActionResult> Index()
     {
         List<ProductDto> list = new List<ProductDto>();
-
         ResponseDto response = await _productService.GetAllProductsAsync();
-
         if (response != null && response.IsSuccess)
         {
             list = JsonConvert.DeserializeObject<List<ProductDto>>(Convert.ToString(response.Result));
