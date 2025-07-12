@@ -69,7 +69,8 @@ namespace KnowCloud.Services
                 {
                     if (requestDto.Data != null)
                     {
-                        message.Content = new StringContent(JsonConvert.SerializeObject(requestDto.Data), Encoding.UTF8, "application/json");
+                        message.Content = new StringContent(JsonConvert.SerializeObject(requestDto.Data), Encoding.UTF8,
+                            "application/json");
                     }
                 }
 
