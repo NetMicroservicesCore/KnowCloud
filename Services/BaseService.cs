@@ -7,6 +7,9 @@ using KnowCloud.Services.Contract;
 
 namespace KnowCloud.Services
 {
+ /// <summary>
+ /// clase base que se encarga de recibir todas las peticiones de los endpoints entrantes.
+ /// </summary>
     public class BaseService: IBaseService
     {
         private readonly IHttpClientFactory _httpClientFactory;
